@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "tailwindcss-primeui"; /* https://www.npmjs.com/package/tailwindcss-primeui?activeTab=code */
+@import "assets/css/theme/colors.css"; /* custome, for theme colors */
+
+
+/*
+prime vue controls use a file called utils.ts, here is is in github
+https://github.com/primefaces/primevue/blob/bee26c557631f99999dfd0716df9adf7fda50ac4/apps/volt/volt/utils.ts#L4 
+*/
+
+/* Primary and Surface Palettes */
+:root {
+    color-scheme: light; 
+    --p-primary-50: #f8f5f2;
+    --p-primary-100: #f4f0ed;
+    --p-primary-200: #e2dbc1;
+    --p-primary-300: #d1c69c;
+    --p-primary-400: #bfa377;
+    --p-primary-500: #aa9f71;
+    --p-primary-600: #93834d;
+    --p-primary-700: #756c34;
+    --p-primary-800: #4e4920;
+    --p-primary-900: #262613;
+    --p-primary-950: #19180c;
+    --p-secondary-50: #fefefe;
+    --p-secondary-100: #caf0f8;
+    --p-secondary-200: #ade8f4;
+    --p-secondary-300: #90e0ef;
+    --p-secondary-400: #48cae4;
+    --p-secondary-500: #00b4d8;
+    --p-secondary-600: #0096c7;
+    --p-secondary-700: #0096c7;
+    --p-secondary-800: #0077b6;
+    --p-secondary-900: #023e8a;
+    --p-secondary-950: #03045e;
+    --p-surface-0: #ffffff;
+    --p-surface-50: #fafafa;
+    --p-surface-100: #f4f4f5;
+    --p-surface-200: #e4e4e7;
+    --p-surface-300: #d4d4d8;
+    --p-surface-400: #a1a1aa;
+    --p-surface-500: #71717a;
+    --p-surface-600: #52525b;
+    --p-surface-700: #3f3f46;
+    --p-surface-800: #27272a;
+    --p-surface-900: #18181b;
+    --p-surface-950: #09090b;
+    --p-content-border-radius: 6px;
+
+}
+
+/* Light */
+:root {
+    --p-primary-color: var(--p-primary-500);
+    --p-primary-contrast-color: var(--p-surface-0);
+    --p-primary-hover-color: var(--p-primary-600);
+    --p-primary-active-color: var(--p-primary-700);
+    --p-content-border-color: var(--p-surface-200);
+    --p-content-hover-background: var(--p-surface-100);
+    --p-content-hover-color: var(--p-surface-800);
+    --p-highlight-background: var(--p-primary-50);
+    --p-highlight-color: var(--p-primary-700);
+    --p-highlight-focus-background: var(--p-primary-100);
+    --p-highlight-focus-color: var(--p-primary-800);
+    --p-text-color: var(--p-surface-700);
+    --p-text-hover-color: var(--p-surface-800);
+    --p-text-muted-color: var(--p-surface-500);
+    --p-text-hover-muted-color: var(--p-surface-600);
+}
+
+/*
+ * Dark Mode
+ * Defaults to system, change the dark variant selector to match the CSS variable configuration.
+ * For example;
+ * @custom-variant dark (&:where(.app-dark, .app-dark *));
+ * should match to;
+ * :root[class="app-dark"]
+*/
+@media (prefers-color-scheme: dark) {
+    :root {
+        --p-primary-color: var(--p-primary-400);
+        --p-primary-contrast-color: var(--p-surface-900);
+        --p-primary-hover-color: var(--p-primary-300);
+        --p-primary-active-color: var(--p-primary-200);
+        --p-content-border-color: var(--p-surface-700);
+        --p-content-hover-background: var(--p-surface-800);
+        --p-content-hover-color: var(--p-surface-0);
+        --p-highlight-background: color-mix(in srgb, var(--p-primary-400), transparent 84%);
+        --p-highlight-color: rgba(255, 255, 255, 0.87);
+        --p-highlight-focus-background: color-mix(in srgb, var(--p-primary-400), transparent 76%);
+        --p-highlight-focus-color: rgba(255, 255, 255, 0.87);
+        --p-text-color: var(--p-surface-0);
+        --p-text-hover-color: var(--p-surface-0);
+        --p-text-muted-color: var(--p-surface-400);
+        --p-text-hover-muted-color: var(--p-surface-300);
+    }
+}
+
+/* Article formatting */
+
+@layer components {
+    /* Blog button links rendered from CMS HTML */
+        .blog-page #main-container a.blog-button {
+            display: inline-block;
+            width: auto;
+            margin: 1.5rem 0;
+            padding: 14px 28px;
+            border-radius: 999px;
+            background-color: var(--p-primary-900);
+            color: var(--p-primary-100) !important;
+            text-decoration: none !important;
+            font-weight: 700;
+            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.2;
+            text-align: center;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+    
+        .blog-page #main-container a.blog-button:hover {
+            color: var(--p-primary-100) !important;
+            text-decoration: none !important;
+            opacity: 0.9;
+        }
+    
+        .blog-page #main-container a.blog-button:focus-visible {
+            color: var(--p-primary-100) !important;
+            text-decoration: none !important;
+            outline: 3px solid var(--p-primary-500);
+            outline-offset: 3px;
+        }
+   /* blog formatting */
+    .blog-page h1 {
+            @apply text-4xl lg:text-5xl text-primary-900 font-thin uppercase pt-20;
+    }
+    .blog-page h2 {
+        @apply text-2xl lg:text-3xl font-semibold leading-loose;
+    }
+    .blog-page h3 {
+        @apply text-xl lg:text-2xl font-semibold leading-[2.2];
+    }
+    .blog-page hr {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .blog-page img {
+        display: block;
+        /* ensures margins work properly */
+        margin-left: auto;
+        /* centers horizontally */
+        margin-right: auto;
+        /* centers horizontally */
+        max-width: 100%;
+        /* prevent overflow on small screens */
+        height: auto;
+        /* keep aspect ratio */
+    }
+    .blog-page p {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .blog-page ul {
+        @apply list-disc list-inside space-y-2;
+    }
+
+    .blog-page ul li {
+        text-indent: -1.4rem;
+        /* pulls first line back */
+        padding-left: 2rem;
+        /* pushes wrapped lines forward */
+        list-style-position: inside;
+        /* ensures bullet stays outside */
+    }
+
+    .blog-page ol {
+        @apply list-decimal list-outside space-y-2 pl-6;
+    }
+
+    .blog-page ol li {
+        @apply align-top text-base;
+    }
+
+    .blog-page ol li::marker {
+        @apply text-2xl font-semibold text-primary-900;
+    }
+
+    /* supporting article formatting */
+    .sa-articles-page h1 {
+        @apply text-4xl lg:text-6xl text-primary-900 font-thin uppercase pt-20;
+    }
+
+    .sa-articles-page h2 {
+        @apply text-2xl lg:text-4xl font-semibold leading-[2];
+    }
+
+    .sa-articles-page h3 {
+        @apply text-xl lg:text-2xl font-semibold leading-[2.2];
+    }
+
+    .sa-articles-page p {
+        @apply pt-2 pb-2;
+    }
+    
+    .sa-articles-page ul {
+        @apply list-disc list-inside space-y-2;
+    }
+    .sa-articles-page ul li {
+        text-indent: -1.4rem;
+        /* pulls first line back */
+        padding-left: 2rem;
+        /* pushes wrapped lines forward */
+        list-style-position: inside;
+        /* ensures bullet stays outside */
+    }
+    .sa-articles-page ol {
+        @apply list-decimal list-outside space-y-2 pl-6;
+    }
+
+    .sa-articles-page ol li {
+        @apply align-top text-base;
+    }
+
+    .sa-articles-page ol li::marker {
+        @apply text-2xl font-semibold text-primary-900;
+    }
+
+    /* Main title formatting for most of our pages. */
+    .k-hero-title {
+        @apply font-thin text-2xl md:text-3xl lg:text-8xl;
+    }
+
+    /* Sub title formatting used in primarily h2's */
+    .k-section-title {
+        @apply text-3xl md:text-6xl;
+    }
+
+    /* Sub title formatting used in primarily h3's */
+    .k-sub-section-title {
+        @apply text-xl md:text-2xl;
+    }
+
+    /* sub title formatting use for some h3's (training and join our team pages) */
+        .k-sub-section-title2 {
+            @apply text-3xl md:text-4xl;
+        }        
+
+    /* Sub title formatting used in primarily links */
+    .k-section-link {
+        @apply text-lg md:text-3xl;
+    }
+
+    /* paragraph text formatting */
+    .k-para-text {
+        @apply md:text-2xl;
+    }
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}

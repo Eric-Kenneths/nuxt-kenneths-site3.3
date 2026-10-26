@@ -1,0 +1,26 @@
+# Allow all crawlers, including AI crawlers (GPTBot, Google-Extended, ChatGPT-User,
+# anthropic-ai, CCBot, cohere-ai, Bingbot, ...). No per-bot groups are needed.
+User-agent: *
+
+# Internal / old-site paths that should not be crawled
+Disallow: /emplworld/
+Disallow: /gcsales/
+Disallow: /webempl/
+Disallow: /webmeet/
+Disallow: /webwo/
+Disallow: /webshop/
+Disallow: /intra/
+
+# Pages still served by the old ASP.NET site (not this app)
+Disallow: /Promos/
+Disallow: /promos/
+Disallow: /ShampooScaries
+Disallow: /shampooscaries
+
+# These two return HTTP 500 from IIS today. Remove them from this list once
+# the old server returns a 404/410 or a redirect for them.
+Disallow: /covid-update
+Disallow: /TermsConditions.aspx
+Disallow: /termsconditions.aspx
+
+Sitemap: https://kenneths.com/sitemap.xml
