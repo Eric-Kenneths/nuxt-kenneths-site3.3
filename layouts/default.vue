@@ -6,9 +6,9 @@
 
     <header class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[1600px] z-50">
       <!-- Row 1 (solid background) -->
-      <div class="bg-primary-500 shadow-md pr-2 lg:pr-0 py-2 lg:py-0">
+      <div class="bg-primary-500 shadow-md pr-2 lg:pr-0 py-2 pl-10 lg:py-0">
         <div class="mx-auto max-w-[1600px] py-0.5 flex justify-between items-center">
-          <span class="text-primary-900 text-xl hidden lg:block">{{ announcement }}</span>
+          <div class="text-white text-xl hidden lg:block pl-2"><a href="/shop/retail/top-sellers">{{ announcement }}</a></div>
 
           <div class="flex flex-1 lg:flex-none lg:mr-13 items-center justify-end">
             <div class="flex items-center gap-3">
@@ -451,7 +451,7 @@ const submenu = ref(null) // Tracks which submenu is open; null shows main menu
 
 const row2Hidden = ref(false)
 
-const announcement = ref('');
+const announcement = ref('Buy More Save More is back! Save up to 20% on retail');
 
 let lastY = 0
 const delta = 8

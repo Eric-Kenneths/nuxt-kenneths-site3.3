@@ -106,7 +106,8 @@ export function useMiscFunctions() {
       }
       
       function validateStreetNumberAndName(address) {
-        const streetPattern = /^\d+\s+[a-zA-Z0-9\s]+$/;
+        //const streetPattern = /^\d+\s+[a-zA-Z0-9\s]+$/;
+        const streetPattern = /^\d+\s+[a-zA-Z0-9\s]+(?:\s+#[a-zA-Z0-9]+)?$/;
         return streetPattern.test(address);
       }
 

@@ -16,6 +16,12 @@
           <p class="font-thin text-4xl md:text-6xl lg:text-8xl max-w-2xl text-center k-header-text-shadow">
             YOUR SALON.<br />YOUR SPA.<br />YOUR SPACE.</p>
         </div>
+        <!-- Layered Image (bottom-right corner) 2026-11-02 -->
+        <a href="/shop/retail/top-sellers">
+          <img src="https://kenneths.com/static/marketing/the-more-the-merrier-20-percent-off.webp" loading="eager"
+            fetchpriority="high" alt="Buy More Save More is back! Save up to 20% on retail"
+            class="absolute bottom-15 right-0 w-100 h-auto z-20" />
+        </a>
         <!-- Layered Image (bottom-right corner) -->
         <!-- <a href="/shop/retail/skin-care">
           <img src="https://kenneths.com/static/marketing/spfslider.webp" loading="eager" fetchpriority="high"
@@ -46,6 +52,11 @@
 
       </div>
       <div class="md:hidden">
+        <a href="/shop/retail/top-sellers">
+          <img src="https://kenneths.com/static/marketing/the-more-the-merrier-20-percent-off.webp" loading="eager"
+            fetchpriority="high" alt="Buy More Save More is back! Save up to 20% on retail"
+            class="w-full h-auto z-20" />
+        </a>
         <!-- <a href="/shop/retail/skin-care">
           <img src="https://kenneths.com/static/marketing/spfslider.webp" loading="eager" fetchpriority="high"
             alt="SPF Sale" class="w-full h-auto z-20" />

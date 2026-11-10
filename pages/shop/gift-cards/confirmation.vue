@@ -84,6 +84,26 @@ let orderSummary = await giftCardGlobal.returnCart(webOrderGCId);
 state.webOrderGcs = orderSummary.webOrderGcs;
 state.orderTotal = orderSummary.orderTotal;
 
+// Tell GTM a gift card purchase completed. Pushed once per order so reloads
+// of this page don't double count. Order total and card count only; no
+// recipient names, emails or other personal data.
+if (import.meta.client) {
+    try {
+        const pushedKey = `gcPurchasePushed_${webOrderGCId}`;
+        if (!localStorage.getItem(pushedKey)) {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'gift_card_purchase',
+                gift_card_value: state.orderTotal,
+                gift_card_count: state.webOrderGcs.length
+            });
+            localStorage.setItem(pushedKey, '1');
+        }
+    } catch (e) {
+        // tracking must never break the confirmation page
+    }
+}
+
 </script>
 
 <style lang="scss" scoped></style>
