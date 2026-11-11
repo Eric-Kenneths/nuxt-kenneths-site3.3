@@ -15,7 +15,7 @@ Anything that must be in the first HTML (headings, body copy, product names and 
 
 ## Redirects
 
-Every removed or renamed route gets a 301 in `routeRules`. Legacy `.aspx` and `/service-guide` redirects stay. The lowercase-URL middleware stays.
+Every removed or renamed route gets a 301 in `routeRules`. Exception: routes that now go to a Zenoti URL are redirected by `server/middleware/zenoti-redirects.ts` and use 302 until the production Zenoti URLs are final (see `08_EXTERNAL_LINK_PATTERNS.md`). Legacy `.aspx` and `/service-guide` redirects stay. The lowercase-URL middleware stays.
 
 ## Sitemap And Robots
 

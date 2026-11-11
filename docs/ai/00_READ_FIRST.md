@@ -23,7 +23,7 @@ New code in a migrated area follows the target. Do not copy the old patterns int
 ## Migration Phases
 
 0. Docs (this folder).
-1. Removal: booking, gift cards, accounts, customer-find, model booking, first-timer popup, marketing tracking. Add 301s and fix the sitemap.
+1. Removal: booking, gift cards, accounts, customer-find, model booking, first-timer popup, marketing tracking. Redirects and sitemap fixed. **Done on branch `phase1-removal`** (Zenoti URLs in `runtimeConfig`, `BookNowButton`, `zenoti-redirects` middleware at 302 until production URLs are final).
 2. Foundation: Pinia, apiClient, app store, filters, runtime config, PrimeVue module.
 3. Backend (Salon-API-10): services sync, `website.*` tables, read-only `WebsiteController`, reviews (`marketing.SocialRating` / `SocialReview`), product tables.
 4. Frontend move, one area at a time: locations, services, team, blog + feed/sitemap, reviews.
