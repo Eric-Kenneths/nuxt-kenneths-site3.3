@@ -184,7 +184,6 @@
 </template>
 
 <script setup>
-import Button from '@/volt/Button'
 
 import { retailGlobal } from '~/composables/retailGlobal'
 import { dataGlobal } from '~/composables/dataGlobal'

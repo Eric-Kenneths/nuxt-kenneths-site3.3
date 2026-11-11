@@ -37,7 +37,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
 
     mhhGlobal.question = 'Which decade were you born?';
     mhhGlobal.selectText = '';

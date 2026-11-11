@@ -1,27 +1,9 @@
+// The one PrimeVue preset for the site. Classes are copied from the former volt/ wrappers
+// so brand colors and shapes do not change. Components are added here as they move off volt/.
+// Tailwind variants like p-small: / p-icon-only: come from the tailwindcss-primeui plugin.
 
-<template>
-    <Button
-        unstyled
-        :pt="theme"
-        :ptOptions="{
-            mergeProps: ptViewMerge
-        }"
-    >
-        <template v-for="(_, slotName) in $slots" v-slot:[slotName]="slotProps">
-            <slot :name="slotName" v-bind="slotProps ?? {}" />
-        </template>
-    </Button>
-</template>
-
-<script setup lang="ts">
-import Button, { type ButtonPassThroughOptions, type ButtonProps } from 'primevue/button';
-import { ref } from 'vue';
-import { ptViewMerge } from './utils';
- 
-interface Props extends /* @vue-ignore */ ButtonProps {}
-defineProps<Props>();
-
-const theme = ref<ButtonPassThroughOptions>({
+const PrimeVueTailwindPreset = {
+  button: {
     root: `inline-flex cursor-pointer select-none items-center justify-center overflow-hidden relative
         px-3 py-2 gap-2 rounded-3xl disabled:pointer-events-none disabled:opacity-60 transition-colors duration-200
         bg-primary-100 enabled:hover:bg-primary-emphasis enabled:active:bg-primary-emphasis-alt text-primary-900
@@ -45,7 +27,9 @@ const theme = ref<ButtonPassThroughOptions>({
     label: `font-medium p-icon-only:invisible p-icon-only:w-0
         p-small:text-sm p-large:text-[1.125rem]`,
     pcBadge: {
-        root: `min-w-4 h-4 leading-4 bg-primary-contrast rounded-full text-primary text-xs font-bold`
+      root: `min-w-4 h-4 leading-4 bg-primary-contrast rounded-full text-primary text-xs font-bold`
     }
-});
-</script>
+  }
+}
+
+export default PrimeVueTailwindPreset

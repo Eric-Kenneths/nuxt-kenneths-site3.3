@@ -87,7 +87,6 @@
 <script setup>
 //import { reactive, onMounted, onBeforeUnmount, ref, nextTick } from 'vue'
 import { mhhGlobal } from '~/composables/mhhGlobal'
-import Button from '@/volt/Button'
 
 mhhGlobal.question = 'Select what location(s) you would like from the map'
 mhhGlobal.selectText = '(Select all that apply)'

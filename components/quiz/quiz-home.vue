@@ -71,7 +71,6 @@ import { mhhGlobal } from '~/composables/mhhGlobal';
 
 import ProgressBar from '@/volt/ProgressBar';
 import Dialog from '@/volt/Dialog';
-import Button from '@/volt/Button.vue';
 
 const props = defineProps({
     scrollerEl: { type: Object, default: null }, // ref passed from parent

@@ -36,7 +36,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
 
     mhhGlobal.question = 'I prefer a stylist who...';
     mhhGlobal.selectText = '';

@@ -51,7 +51,6 @@
 
 <script setup>
 import Select from '@/volt/Select.vue';
-import Button from '@/volt/Button.vue';
 
 const props = defineProps({
   title: String,

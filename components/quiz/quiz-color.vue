@@ -37,7 +37,6 @@
 <script setup>
 import { mhhGlobal } from '~/composables/mhhGlobal';
 
-import Button from '@/volt/Button';
 
 mhhGlobal.question = 'Colorwise what is your hair goal?';
 mhhGlobal.selectText = '(Choose one)';

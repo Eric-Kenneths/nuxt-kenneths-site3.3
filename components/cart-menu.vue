@@ -146,7 +146,6 @@
 
 
 <script setup>
-import Button from '@/volt/Button.vue'
 import { retailGlobal } from '~/composables/retailGlobal'
 import { dataGlobal } from '~/composables/dataGlobal'
 

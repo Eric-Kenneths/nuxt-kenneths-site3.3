@@ -57,7 +57,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
     import InputText from '@/volt/InputText';
 
     mhhGlobal.question = 'Almost Done!';

@@ -38,7 +38,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
 
     mhhGlobal.question = 'Which best describes your hair type?';
     mhhGlobal.selectText = '(Choose up to two)';

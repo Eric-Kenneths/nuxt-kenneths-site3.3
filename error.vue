@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-    import Button from '@/volt/Button.vue';
 
     const error = useError()
 

@@ -31,7 +31,6 @@
 <script setup>
 import { mhhGlobal } from '~/composables/mhhGlobal';
 
-import Button from '@/volt/Button';
 
 mhhGlobal.question = 'What services are you interested in receiving?';
 mhhGlobal.selectText = '(SELECT ALL THAT APPLY)';

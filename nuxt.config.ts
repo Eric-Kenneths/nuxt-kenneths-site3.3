@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite";
 
@@ -32,7 +33,14 @@ export default defineNuxtConfig({
     ],
   },
 
-  modules: ['@nuxtjs/google-fonts', 'nuxt-gtag', '@pinia/nuxt'],
+  modules: ['@nuxtjs/google-fonts', 'nuxt-gtag', '@pinia/nuxt', '@primevue/nuxt-module'],
+  // PrimeVue runs unstyled; all styling comes from presets/primevue-tailwind-preset.js.
+  // Only components already moved off volt/ are registered here; add each one as it moves.
+  primevue: {
+    options: { unstyled: true },
+    importPT: { as: 'PrimeVueTailwindPreset', from: fileURLToPath(new URL('./presets/primevue-tailwind-preset.js', import.meta.url)) },
+    components: { include: ['Button', 'Toast'] }
+  },
   gtag: {
     id: 'G-2C8BCH5WD0',
     loadingStrategy: 'defer'

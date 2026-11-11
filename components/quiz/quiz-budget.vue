@@ -37,7 +37,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
 
     mhhGlobal.question = 'Choose your desired level of expertise.';
     mhhGlobal.selectText = '';

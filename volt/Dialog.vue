@@ -34,7 +34,6 @@ import WindowMaximizeIcon from '@primevue/icons/windowmaximize';
 import WindowMinimizeIcon from '@primevue/icons/windowminimize';
 import Dialog, { type DialogPassThroughOptions, type DialogProps } from 'primevue/dialog';
 import { ref } from 'vue';
-import Button from './Button.vue';
 import { ptViewMerge } from './utils';
 
 interface Props extends /* @vue-ignore */ DialogProps {}

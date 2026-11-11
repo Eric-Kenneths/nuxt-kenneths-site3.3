@@ -37,7 +37,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
 
     mhhGlobal.question = 'My personal interest or hobbies are?';
     mhhGlobal.selectText = '(Select all that apply)';

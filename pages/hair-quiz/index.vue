@@ -143,7 +143,6 @@
 <script setup>
 import { mhhGlobal } from '~/composables/mhhGlobal';
 
-import Button from '@/volt/Button.vue';
 
 useHead({
     title: "Find Your Perfect Stylist | Hair Quiz | Kenneth's",

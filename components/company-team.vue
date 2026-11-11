@@ -95,7 +95,6 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import Button from '@/volt/Button.vue';
 import InputText from '@/volt/InputText.vue';
 
 const props = defineProps({

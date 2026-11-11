@@ -87,7 +87,6 @@
 </template>
 
 <script setup>
-import Button from '@/volt/Button.vue';
 import Checkbox from '@/volt/Checkbox.vue';
 import InputText from '@/volt/InputText.vue';
 import Accordion from '@/volt/Accordion.vue';

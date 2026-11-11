@@ -103,7 +103,6 @@ import ChevronRightIcon from '@primevue/icons/chevronright';
 import ChevronUpIcon from '@primevue/icons/chevronup';
 import DatePicker from 'primevue/datepicker';
 import { ref } from 'vue';
-import Button from './Button.vue';
 import { ptViewMerge } from './utils';
 
 const theme = ref({

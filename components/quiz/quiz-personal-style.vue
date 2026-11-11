@@ -37,7 +37,6 @@
 <script setup>
     import { mhhGlobal } from '~/composables/mhhGlobal';
 
-    import Button from '@/volt/Button';
 
     mhhGlobal.question = 'How would you describe your personal style?';
     mhhGlobal.selectText = '(Choose one)';

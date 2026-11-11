@@ -89,7 +89,6 @@
 </template>
 
 <script setup>
-import Button from '@/volt/Button.vue'
 import { appGlobal } from '~/composables/appGlobal'
 import { dataGlobal } from '~/composables/dataGlobal'
 import { onMounted, nextTick, watch } from 'vue'
