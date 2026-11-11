@@ -15,7 +15,6 @@
 
 import { RETAIL_SITEMAP_SLUGS } from '../../shared/retailGroups';
 
-const API_BASE = 'https://api.kenneths.com/api';
 const SITE_URL = 'https://kenneths.com';
 
 const LOCATIONS = [
@@ -61,8 +60,8 @@ function toLastmodDate(raw: unknown): string | undefined {
   return match ? match[0] : undefined;
 }
 
-async function fetchJson(path: string): Promise<any> {
-  const response = await fetch(`${API_BASE}${path}`);
+async function fetchJson(apiBase: string, path: string): Promise<any> {
+  const response = await fetch(`${apiBase}${path}`);
 
   if (!response.ok) {
     throw new Error(`API request failed (${response.status}): ${path}`);
@@ -71,7 +70,7 @@ async function fetchJson(path: string): Promise<any> {
   return response.json();
 }
 
-async function buildEntries(): Promise<UrlEntry[]> {
+async function buildEntries(apiBase: string): Promise<UrlEntry[]> {
   const entries: UrlEntry[] = [];
 
   // Route values come straight from the database, and a few carry stray spaces (trailing, or inside
@@ -126,7 +125,7 @@ async function buildEntries(): Promise<UrlEntry[]> {
   }
 
   // ---- Blog posts ----
-  const blogHeaders = await fetchJson('/khsds/Blog/ListHeaders');
+  const blogHeaders = await fetchJson(apiBase, '/khsds/Blog/ListHeaders');
   for (const post of Array.isArray(blogHeaders) ? blogHeaders : (blogHeaders?.blogHeaders ?? [])) {
     // Some stored route names carry a trailing space; it must not leak into the <loc>
     const routeName = String(post?.routeName ?? '').trim();
@@ -137,7 +136,7 @@ async function buildEntries(): Promise<UrlEntry[]> {
   }
 
   // ---- Geo stack pages ----
-  const geoStackResponse = await fetchJson('/Khsds/GeoStackPagesForPublish');
+  const geoStackResponse = await fetchJson(apiBase, '/Khsds/GeoStackPagesForPublish');
   for (const page of geoStackResponse?.geoStackPageViewModels ?? []) {
     if (page?.locationRoute && page?.pointOfInterestRoute) {
       add(
@@ -149,7 +148,7 @@ async function buildEntries(): Promise<UrlEntry[]> {
   }
 
   // ---- Service supporting-stack articles ----
-  const stackPageResponse = await fetchJson('/Khsds/SupportingStackPagesForPublish');
+  const stackPageResponse = await fetchJson(apiBase, '/Khsds/SupportingStackPagesForPublish');
   for (const page of stackPageResponse?.supportingStackPages ?? []) {
     if (page?.serviceCategory && page?.serviceTypeRoute && page?.stackPageRoute) {
       add(
@@ -161,7 +160,7 @@ async function buildEntries(): Promise<UrlEntry[]> {
   }
 
   // ---- Retail products ----
-  const itemWebResponse = await fetchJson('/khsds/ItemWeb/SiteMap');
+  const itemWebResponse = await fetchJson(apiBase, '/khsds/ItemWeb/SiteMap');
   for (const item of itemWebResponse?.listItemWebForSiteMapViewModels ?? []) {
     if (item?.urlRouteName) {
       add(`/shop/retail/product/${String(item.urlRouteName).toLowerCase()}`, '0.80');
@@ -170,7 +169,7 @@ async function buildEntries(): Promise<UrlEntry[]> {
 
   // ---- Staff profiles ----
   const technicianPositionIds = new Set([26, 33, 34, 35, 43]);
-  const employeeResponse = await fetchJson('/employees/SocialMedia/ForWeb/AL');
+  const employeeResponse = await fetchJson(apiBase, '/employees/SocialMedia/ForWeb/AL');
   for (const employee of employeeResponse?.listSocialMediaByLocationForWebViewModels ?? []) {
     if (employee?.city && employee?.emalias && technicianPositionIds.has(employee.positionId)) {
       add(`/our-team/profile/${employee.city}/${String(employee.emalias).toLowerCase()}`, '0.85');
@@ -184,7 +183,7 @@ export default defineEventHandler(async (event) => {
   let entries: UrlEntry[];
 
   try {
-    entries = await buildEntries();
+    entries = await buildEntries(useRuntimeConfig(event).legacyApiServerUrl);
   } catch (e: any) {
     setResponseStatus(event, 500);
     return `Sitemap generation failed: ${e?.message || 'unknown error'}`;

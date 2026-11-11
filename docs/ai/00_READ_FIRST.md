@@ -24,7 +24,7 @@ New code in a migrated area follows the target. Do not copy the old patterns int
 
 0. Docs (this folder).
 1. Removal: booking, gift cards, accounts, customer-find, model booking, first-timer popup, marketing tracking. Redirects and sitemap fixed. **Done on branch `phase1-removal`** (Zenoti URLs in `runtimeConfig`, `BookNowButton`, `zenoti-redirects` middleware at 302 until production URLs are final).
-2. Foundation: Pinia, apiClient, app store, filters, runtime config, PrimeVue module.
+2. Foundation: Pinia, apiClient, app store, filters, runtime config, PrimeVue module. **In progress on `phase2-foundation`**: Pinia (`@pinia/nuxt`), `api/apiClient.js`, `stores/global/appStore.js`, `filters/index.js` and API URLs in `runtimeConfig` are in; the PrimeVue module/preset is not started.
 3. Backend (Salon-API-10): services sync, `website.*` tables, read-only `WebsiteController`, reviews (`marketing.SocialRating` / `SocialReview`), product tables.
 4. Frontend move, one area at a time: locations, services, team, blog + feed/sitemap, reviews.
 5. Cutover: finish the preset, delete `volt/`, point production at Salon-API-10, compare sitemaps and crawl for 404s.

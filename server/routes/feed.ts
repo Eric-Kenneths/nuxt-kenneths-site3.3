@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   try {
    
 
-    const url = 'https://api.kenneths.com/api/khsds/feed-content';
+    const url = `${useRuntimeConfig(event).legacyApiServerUrl}/khsds/feed-content`;
 
     let posts = [];
 

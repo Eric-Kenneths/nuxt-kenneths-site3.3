@@ -378,13 +378,14 @@
 </template>
 
 <script setup>
+import { useAppStore } from '~/stores/global/appStore'
 import Toast from '@/volt/Toast.vue';
 import Button from '@/volt/Button.vue';
 import { retailGlobal } from '~/composables/retailGlobal';
 import { appGlobal } from '~/composables/appGlobal';
 const route = useRoute()
 const config = useRuntimeConfig()
-const { giftCardsUrl } = useZenotiLinks()
+const { giftCardsUrl } = useAppStore()
 
 const canonicalUrl = computed(() => {
   return `${config.public.siteUrl}${route.path}`

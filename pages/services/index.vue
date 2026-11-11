@@ -301,7 +301,8 @@
 </template>
 
 <script setup>
-const { giftCardsUrl } = useZenotiLinks()
+import { useAppStore } from '~/stores/global/appStore'
+const { giftCardsUrl } = useAppStore()
 const jsonLD = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',

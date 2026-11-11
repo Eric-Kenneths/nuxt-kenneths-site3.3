@@ -4,7 +4,7 @@ import { appGlobal } from '~/composables/appGlobal';
 export default defineNuxtPlugin(nuxtApp => {
 
     appGlobal.isDevMode = process.env.NODE_ENV ===  "production" ? false : true;
-    appGlobal.apiBaseUrl = process.env.NODE_ENV ===  "production" ? "https://api.kenneths.com/api" : "https://localhost:44325/api";
+    appGlobal.apiBaseUrl = useRuntimeConfig().public.legacyApiBaseUrl;
 
 
     

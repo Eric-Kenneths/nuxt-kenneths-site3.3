@@ -67,7 +67,8 @@
 </template>
 
 <script setup>
-const { bookUrl } = useZenotiLinks()
+import { useAppStore } from '~/stores/global/appStore'
+const { bookUrl } = useAppStore()
 const route = useRoute()
 
 const state = reactive({

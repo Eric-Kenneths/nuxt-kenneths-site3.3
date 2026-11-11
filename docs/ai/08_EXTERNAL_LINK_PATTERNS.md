@@ -4,7 +4,7 @@ Booking and gift cards are handled by Zenoti. The site only links out.
 
 ## Source Of Truth
 
-Zenoti links live in `runtimeConfig.public.zenoti` (`servicesUrl`, `giftCardsUrl`). Until Phase 2 adds the app store, read them with `composables/useZenotiLinks.js` (`bookUrl()`, `giftCardsUrl()`); Phase 2 moves them into `appStore`. For a Book button use `components/BookNowButton.vue`, which wraps `useZenotiLinks`.
+Zenoti links live in `runtimeConfig.public.zenoti` (`servicesUrl`, `giftCardsUrl`). Read them through `useAppStore()` (`stores/global/appStore.js`): `bookUrl(query)` and `giftCardsUrl()`. For a Book button use `components/BookNowButton.vue`, which wraps `appStore.bookUrl`.
 
 | Purpose | Stage value |
 | --- | --- |

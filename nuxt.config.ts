@@ -7,8 +7,15 @@ export default defineNuxtConfig({
   pages: true,
   devtools: { enabled: true },
   runtimeConfig: {
+    // Server routes (feed, post, sitemap) read the production legacy API even in dev.
+    // Override with NUXT_LEGACY_API_SERVER_URL.
+    legacyApiServerUrl: 'https://api.kenneths.com/api',
     public: {
       siteUrl: 'https://kenneths.com',
+      // API base URLs. Override with NUXT_PUBLIC_SALON_API_BASE_URL / NUXT_PUBLIC_LEGACY_API_BASE_URL.
+      // Salon-API-10 has no production URL yet; the default is the local dev server.
+      salonApiBaseUrl: 'https://localhost:7257/api',
+      legacyApiBaseUrl: process.env.NODE_ENV === 'production' ? 'https://api.kenneths.com/api' : 'https://localhost:44325/api',
       // Zenoti links. Stage defaults; production overrides them with
       // NUXT_PUBLIC_ZENOTI_SERVICES_URL and NUXT_PUBLIC_ZENOTI_GIFT_CARDS_URL.
       zenoti: {
@@ -25,7 +32,7 @@ export default defineNuxtConfig({
     ],
   },
 
-  modules: ['@nuxtjs/google-fonts', 'nuxt-gtag'],
+  modules: ['@nuxtjs/google-fonts', 'nuxt-gtag', '@pinia/nuxt'],
   gtag: {
     id: 'G-2C8BCH5WD0',
     loadingStrategy: 'defer'
