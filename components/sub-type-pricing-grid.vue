@@ -58,7 +58,6 @@
 </template>
 
 <script setup>
-import Dialog from '@/volt/Dialog';
 import { dataGlobal } from '~/composables/dataGlobal'
 
 const priceLevels = [

@@ -79,7 +79,6 @@
 <script setup>
 import { accountGlobal } from '~/composables/accountGlobal';
 
-import Dialog from '@/volt/Dialog';
 import InputText from '@/volt/InputText';
 
 

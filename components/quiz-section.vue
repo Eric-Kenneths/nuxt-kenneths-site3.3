@@ -54,7 +54,6 @@
 <script setup>
 import { mhhGlobal } from '~/composables/mhhGlobal';
 
-import Dialog from '@/volt/Dialog';
 
 
 const quizScroller = ref(null)

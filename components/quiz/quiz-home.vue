@@ -70,7 +70,6 @@
 import { mhhGlobal } from '~/composables/mhhGlobal';
 
 import ProgressBar from '@/volt/ProgressBar';
-import Dialog from '@/volt/Dialog';
 
 const props = defineProps({
     scrollerEl: { type: Object, default: null }, // ref passed from parent

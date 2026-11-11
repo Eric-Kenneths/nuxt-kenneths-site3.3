@@ -40,7 +40,7 @@ export default defineNuxtConfig({
     options: { unstyled: true },
     loadStyles: false,
     importPT: { as: 'PrimeVueTailwindPreset', from: fileURLToPath(new URL('./presets/primevue-tailwind-preset.js', import.meta.url)) },
-    components: { include: ['Button', 'Toast', 'Accordion', 'AccordionPanel', 'AccordionHeader', 'AccordionContent'] }
+    components: { include: ['Button', 'Toast', 'Accordion', 'AccordionPanel', 'AccordionHeader', 'AccordionContent', 'Dialog'] }
   },
   gtag: {
     id: 'G-2C8BCH5WD0',
