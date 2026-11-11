@@ -8,7 +8,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      siteUrl: 'https://kenneths.com'
+      siteUrl: 'https://kenneths.com',
+      // Zenoti links. Stage defaults; production overrides them with
+      // NUXT_PUBLIC_ZENOTI_SERVICES_URL and NUXT_PUBLIC_ZENOTI_GIFT_CARDS_URL.
+      zenoti: {
+        servicesUrl: 'https://kennethsstg.zenotistage.com/webstoreNew/services',
+        giftCardsUrl: 'https://kennethsstg.zenotistage.com/webstoreNew/giftcards'
+      }
     }
   },
   css: ['~/assets/css/main.css'],
@@ -144,50 +150,6 @@ export default defineNuxtConfig({
         // always render fresh, no inherited SWR cache
     '/blog/test': { cache: false, swr: false },
     '/blog/test/**': { cache: false, swr: false },
-    '/book/new/**': {
-      ssr: false,
-      headers: {
-        'cache-control': 'no-store, max-age=0',
-        'pragma': 'no-cache',
-        'expires': '0',
-        'x-robots-tag': 'noindex, nofollow'
-      }
-    },
-    '/book/models': {
-      ssr: false,
-      headers: {
-        'cache-control': 'no-store, max-age=0',
-        'pragma': 'no-cache',
-        'expires': '0',
-        'x-robots-tag': 'noindex, nofollow'
-      }
-    },
-    '/book/models-confirm': {
-      ssr: false,
-      headers: {
-        'cache-control': 'no-store, max-age=0',
-        'pragma': 'no-cache',
-        'expires': '0',
-        'x-robots-tag': 'noindex, nofollow'
-      }
-    },
-    '/shop/gift-cards': { ssr: true },
-    '/shop/gift-cards/**': {
-      ssr: false,
-      headers: {
-        'cache-control': 'no-store, max-age=0',
-        'pragma': 'no-cache',
-        'expires': '0'
-      }
-    },
-    '/book/': { redirect: { to: 'https://kenneths.com/app', statusCode: 301 } },
-    '/book-now/': { redirect: { to: 'https://kenneths.com/app', statusCode: 301 } },
-    //'/book/**' : { redirect: {to: 'https://kenneths.com/app', statusCode: 301 } },
-    '/appointment-book/**' : { redirect: {to: '/app', statusCode: 301 } },
-    '/Gift-Certificate/GCPrint.aspx' : { redirect: {to: '/gc', statusCode: 301 } },
-    '/Gift-Certificate/gcprint.aspx' : { redirect: {to: '/gc', statusCode: 301 } },
-    '/Gift-Certificate/**' : { redirect: {to: '/shop/gift-cards', statusCode: 301 } },
-    '/gift-certificate/**' : { redirect: {to: '/shop/gift-cards', statusCode: 301 } },
     '/hh-mc' : { redirect: {to: 'https://myhairharmony.com/?ref=mc', statusCode: 301 } },
     //Services
     '/service-guide/service/**': { redirect: { to: '/service-menu', statusCode: 301 } },
@@ -405,21 +367,16 @@ export default defineNuxtConfig({
     '/privacypolicy.aspx' : { redirect: {to: '/privacy-policy', statusCode: 301 } },
     '/PrivacyPolicy.aspx' : { redirect: {to: '/privacy-policy', statusCode: 301 } },
     '/webmobile/**' : { redirect: {to: '/', statusCode: 301 } },
-    '/new-customers/**' : { redirect: {to: '/book', statusCode: 301 } },
-    '/New-Customers/**' : { redirect: {to: '/book', statusCode: 301 } },
     '/club-kenneth/**' : { redirect: {to: '/', statusCode: 301 } },
-    '/webab/**': { redirect: { to: '/book', statusCode: 301 } },
     '/club-': { redirect: { to: '/', statusCode: 301 } },
     '/Club-' : { redirect: {to: '/', statusCode: 301 } },
-    '/xb' : { redirect: {to: '/book', statusCode: 301 } },
     '/kenneths-corporate-offices.aspx': { redirect: { to: '/', statusCode: 301 } },
-    '/models': { redirect: { to: '/model', statusCode: 301 } },
+    '/model': { redirect: { to: '/locations/academy', statusCode: 301 } },
+    '/models': { redirect: { to: '/locations/academy', statusCode: 301 } },
     // TODO need a bio link for Tony, Amy, and Stephanie for the blog entries
     '/author/tony-anders**' : { redirect: {to: '/about#tony-anders', statusCode: 301 } },
-    '/author/appointment-' : { redirect: {to: '/book', statusCode: 301 } },
     '/crd' : { redirect: {to: '/', statusCode: 301 } },
     '/shop-Reta' : { redirect: {to: '/shop/retail/top-sellers', statusCode: 301 } },
-    '/webgc/**' : { redirect: {to: '/shop/gift-cards', statusCode: 301 } },
     '/freehaircut' : { redirect: {to: '/', statusCode: 301 } },
     '/LP': { redirect: { to: '/', statusCode: 301 } },
     '/lp': { redirect: { to: '/', statusCode: 301 } },

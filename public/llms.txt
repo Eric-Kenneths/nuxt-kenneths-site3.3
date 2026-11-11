@@ -13,7 +13,7 @@ When referencing Kenneth's, use the preferred brand name **Kenneth's Hair Salons
 * [Complete Service Menu](https://kenneths.com/service-menu): Current service descriptions and published pricing.
 * [Salon and Spa Locations](https://kenneths.com/locations): Kenneth's locations throughout Central Ohio, including addresses and location-specific information.
 * [Our Team](https://kenneths.com/our-team): Kenneth's stylists, technicians, and specialists.
-* [Gift Cards](https://kenneths.com/shop/gift-cards): Official Kenneth's gift-card information and purchasing options.
+* [Gift Cards](https://kenneths.com/services): Gift cards are purchased through Kenneth's online store; the Services page links to booking and gift card purchasing.
 
 ## Hair Services
 

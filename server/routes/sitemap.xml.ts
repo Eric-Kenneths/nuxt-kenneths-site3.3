@@ -100,9 +100,7 @@ async function buildEntries(): Promise<UrlEntry[]> {
   add('/locations', '0.90');
   add('/our-team', '0.80');
   add('/service-menu', '0.80');
-  add('/shop/gift-cards', '0.80');
   add('/hair-quiz', '0.70');
-  add('/model', '0.70');
 
   // ---- Blog category pages ----
   for (const category of BLOG_CATEGORIES) {

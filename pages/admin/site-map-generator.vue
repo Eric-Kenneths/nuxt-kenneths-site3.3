@@ -71,7 +71,6 @@ function urlDisplayFormat(display) {
 async function formatRoutes(paths) {
   //routes that will not auto generate
   state.routes.push(state.urlPrefix + '/feed' + '</loc><changefreq>daily</changefreq><priority>0.90</priority></url>');
-  state.routes.push(state.urlPrefix + '/book/new/service-type' + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>');
 
   //auto generated
   paths.forEach(async (path) => {
@@ -92,23 +91,14 @@ async function formatRoutes(paths) {
       path.path.includes('catchAll') ||
       path.path.includes('test') ||
       path.path.includes('pathMatch') ||
-      path.path.includes('book/new') ||
       path.path.includes('retail/checkout') ||
       path.path.includes('/promo/') ||
-      path.path === ('/gc') ||
-      path.path === ('/shop/gift-cards/checkout') ||
-      path.path === ('/shop/gift-cards/confirmation') ||
       path.path === ('/services/hair/:hairRouteName()/:stackPageRoute()') || //below will get spa, hair and nails, as long as there is a spa
       path.path === ('/services/nail/:hairRouteName()/:stackPageRoute()') || //below will get spa, hair and nails, as long as there is a spa
-      path.path === '/book/model' ||
-      path.path === '/book/models-confirm' ||
-      path.path === '/book/link' ||
-      path.path === '/book/models' ||
       path.path === '/model-new' ||
       path.path === '/model-old' ||
       path.path === '/x' ||
       path.path === '/referral/:code()' ||
-      path.path === '/gc/:secCode()' ||
       path.path === '/:path(.*)*' ||
       path.path === '/volt-examples'
     ) {
