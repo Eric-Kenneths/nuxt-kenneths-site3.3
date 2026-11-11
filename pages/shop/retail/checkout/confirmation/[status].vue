@@ -366,26 +366,6 @@ onMounted(async () => {
         }
 
         /*
-         * Existing Kenneth's marketing conversion
-         */
-        try {
-            if (
-                dataGlobal.marketingTracking.webMarketingDtId !== 0
-            ) {
-                await putMarketingConversion(
-                    dataGlobal.marketingTracking.webMarketingDtId,
-                    orderId,
-                    'WEBRETAIL'
-                )
-            }
-        } catch (error) {
-            console.error(
-                'Marketing conversion tracking failed:',
-                error
-            )
-        }
-
-        /*
          * Preserve confirmation details before clearing
          * the global retail cart.
          */

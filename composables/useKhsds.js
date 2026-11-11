@@ -228,73 +228,6 @@ export function useKhsds() {
         return object.value;
       }
     
-      async function postMarketingClickThru(webMarketingHdId, customerCode, email) {
-        const url = appGlobal.apiBaseUrl + '/khsds/MarketingClickThru';
-    
-        const marketingClickThruViewModel = {
-          webMarketingHdId: webMarketingHdId,
-          customerCode: customerCode,
-          email: email
-        }
-    
-        integer.value = 0;
-    
-        const options = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(marketingClickThruViewModel)
-        };
-        
-        await fetch(url, options)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) {
-              return 0;
-            }
-            
-            integer.value = data.webMarketingDtId;
-          })
-          .catch(function (e) {
-
-          }).finally(function () {
-    
-          })
-    
-        return integer;
-      }
-    
-      async function putMarketingConversion(webMarketingDtId, miscId, app) {
-        const url = appGlobal.apiBaseUrl + '/khsds/MarketingConversion';
-    
-        const marketingConversionViewModel = {
-          webMarketingDtId: webMarketingDtId,
-          miscId: miscId,
-          app: app
-        }
-    
-        integer.value = 0;
-    
-        const options = {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(marketingConversionViewModel)
-        };
-        
-        await fetch(url, options)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) {
-              throwError(500, "Error in useKhsds.putMarketingConversion");
-            }
-            
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          }).finally(function () {
-    
-          })
-      }
-    
       async function getItemWebById(itemWebId) {
         const url = appGlobal.apiBaseUrl + '/khsds/ItemWeb/GetByItemWebForWebRetail/' + itemWebId;
         
@@ -880,55 +813,6 @@ export function useKhsds() {
           return locations;
       }
 
-      async function getLocationsThatCanDoService(services, appType, showAcademy, showAll) {
-        const url = appGlobal.apiBaseUrl + '/khsds/LocationsThatCanDoService/' + services + '/' + appType + '/' + showAcademy + '/' + showAll;
-        
-        array.value = [];
-        
-        await fetch(url)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) { 
-              throwError(500, "Error in useKhsds.getLocationsThatCanDoService");
-            }
-            array.value = data.locationsThatCanDoServiceViewModels;
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () { 
-            //Maybe do something
-          })
-          
-        return array.value;
-      }
-
-      async function getLocationsThatCanDoServiceByLevel(services, level, fromChairDate, showAcademy, showAll) {
-        const url = appGlobal.apiBaseUrl + '/khsds/LocationsThatCanDoServiceByLevel/' + services + '/' + level + '/' + fromChairDate + '/' + showAcademy + '/' + showAll;
-        
-        array.value = [];
-        
-        await fetch(url)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) { 
-              throwError(500, "Error in useKhsds.getLocationsThatCanDoServiceByLevel");
-            }
-            array.value = data.locationsThatCanDoServiceViewModels;
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () { 
-            //Maybe do something
-          })
-          
-        return array.value;
-      }
-
-
-
-
       async function getServiceDescriptionNoPrice(services) {
         const url = appGlobal.apiBaseUrl + '/khsds/ServicesDescriptionNoPrice/' + services;
         
@@ -974,30 +858,6 @@ export function useKhsds() {
           
         return array.value;
       }
-
-      async function getMarketingSources(applicationTypeId) {
-        const url = appGlobal.apiBaseUrl + '/khsds/MarketingSources/' + applicationTypeId;
-        
-        const marketingSources = ref([]);
-
-        await fetch(url)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) { 
-              throwError(500, "Error in useKhsds.getMarketingSources");
-            }
-            marketingSources.value = data;
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () { 
-            //Maybe do something
-          })
-          
-        return marketingSources.value;
-      }
-
 
       async function getGeoStackPage(pointOfInterestRoute) {
         appGlobal.loading = true;
@@ -1115,35 +975,6 @@ export function useKhsds() {
           return codeDescription;
       } 
 
-      async function getCustomerCoupon(customerCouponId) {
-        appGlobal.loading = true;
-        
-        const url = appGlobal.apiBaseUrl + '/Khsds/CustomerCoupon/' + customerCouponId;
-        
-        const options = getRequestOptions('GET', false);
-    
-        var customerCoupon = {};
-    
-        await fetch(url, options)
-          .then(response =>  response.json().then(data => ({status: response.status, body: data})))
-          .then(function(obj) {
-  
-            if (obj.status !== 200) {
-              throwError(500, "Error in useKhsds.getCustomerCoupon");
-            } else {
-              customerCoupon = obj.body.customerCouponViewModel;
-            }
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () {
-            appGlobal.loading = false;
-          })
-    
-          return customerCoupon;
-      } 
-
       async function getTechnicianName(technicianCode) {
         appGlobal.loading = true;
         
@@ -1214,10 +1045,8 @@ export function useKhsds() {
         getItemWebListForWeb,
         getBlogHeaders,
         getBlogDetailsByHeaderId,
-        postMarketingClickThru,
         getItemWebById,
         postWebRetailSession,
-        putMarketingConversion,
         getWebRetailSessionById,
         getWebRetailSessionByCustomerId,
         putWebRetailSession,
@@ -1240,16 +1069,12 @@ export function useKhsds() {
         getItemWebForSiteMap,
         getTechnicianLiteForWebRetail,
         getLocationSalons,
-        getLocationsThatCanDoService,
-        getLocationsThatCanDoServiceByLevel,
         getServiceDescriptionNoPrice,
         getStylistLevels,
-        getMarketingSources,
         getGeoStackPage,
         getGeoStackPagesForPublish,
         getSupportingStackPageForPublish,
         getCodeDescriptions,
-        getCustomerCoupon,
         getTechnicianName
       }
 }

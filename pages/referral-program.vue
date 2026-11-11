@@ -140,8 +140,15 @@
                         </section>
                     </div>
 
-                    <!-- Login Create an account Button Section -->
-                    <login-newaccount-section />
+                    <!-- Book Button Section -->
+                    <div class="relative z-10 flex items-center h-full py-5 md:py-12 bg-primary-900 text-primary-900">
+                        <div class="px-5 md:px-10 mx-auto flex justify-center">
+                            <BookNowButton
+                                class="w-48 py-2 rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap text-center">
+                                Book Now
+                            </BookNowButton>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

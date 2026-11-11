@@ -250,7 +250,6 @@
     <verify-form
     :mobile-number="state.billingPhone"
     @didVerify="didVerify"
-    show-login="false"
     return-code-only="true"
     message="To complete your retail purchase, please enter your mobile phone number and we will send you a text verification code."
     />

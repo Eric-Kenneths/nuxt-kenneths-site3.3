@@ -25,12 +25,6 @@
         </div>
       </div>
 
-      <div v-if="props.showLogin==='true'" class="grid md:ml-7 lg:mx-7 pt-4 text-center justify-center">
-        <div class="col-span-12 items-center md:w-[600px]">
-          <div class="text-2xl text-blue-600 cursor-pointer" @click="accountGlobal.verifyStep = 'login'">Current Customer?
-            Login</div>
-        </div>
-      </div>
 
     </template>
 
@@ -65,42 +59,6 @@
       </div>
     </template>
 
-    <template v-if="accountGlobal.verifyStep === 'login'">
-      <div class="grid md:ml-7 lg:mx-7 pt-4 text-center justify-center">
-        <div class="grid grid-cols-12 col-span-12 items-center md:w-[600px]">
-          <div class="col-span-2 text-left pt-1">
-            <!-- <div class="pi pi-chevron-left cursor-pointer text-2xl" @click="accountGlobal.verifyStep = 'text'"><</div> -->
-             <Button label="<" class="absolute top-0 px-4 left-3 lg:left-1/8 xl:left-1/4" rounded severity="secondary"
-    aria-label="Back" @click="accountGlobal.verifyStep = 'text'" />
-          </div>
-          <div class="col-span-8 text-center font-sans">
-            <div class="inline font-serif text-xl lg:text-2xl">
-              Login
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="grid md:ml-7 lg:mx-7 pt-4 text-center justify-center">
-        <div class="col-span-12 items-center md:w-[400px]">
-          <div class="grid">
-            <div class="col-span-12 text-left">
-              <InputText id="email" class="text-input w-full" v-model="state.email" placeholder="Email" />
-            </div>
-            <div class="flex col-span-12 text-left mt-3">
-              <Password id="password" class="text-input" v-model="state.password" :feedback="false" placeholder="Password" toggleMask />
-            </div>
-            <div class="col-span-12">
-              <div class="inline text-xl lg:text-2xl text-red-600 font-bold">{{ state.loginErrorMessage }}
-              </div>
-            </div>
-            <div class="col-span-12 mt-4">
-              <Button label="Login" id="loginButton" class="uppercase style-button" @click="login" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
 
     <div class="grid md:ml-7 lg:mx-7 pt-2 text-center justify-center">
       <div class="col-span-12 items-center md:w-[600px]">
@@ -120,19 +78,13 @@
 
 <script setup>
 import { accountGlobal } from '~/composables/accountGlobal';
-import { bookGlobal } from '~/composables/bookGlobal';
 
 import Button from '@/volt/Button';
 import Dialog from '@/volt/Dialog';
 import InputText from '@/volt/InputText';
-import Password from '@/volt/Password';
 
 
 const props = defineProps({
-  showLogin: {
-    type: String,
-    default: 'true'
-  },
   message: {
     type: String,
     default: ''
@@ -149,15 +101,10 @@ const props = defineProps({
 
 const emit = defineEmits(['didVerify'])
 
-const { putCustomerLogin } = useCustomer();
-
 const state = reactive({
-  verifyMessage: 'To reserve your appointment enter your mobile phone number and we will send you a text verfication code.',
+  verifyMessage: 'Enter your mobile phone number and we will send you a text verification code.',
   mobileNumber: '',
-  verificationCode: '',
-  email: '',
-  password: '',
-  loginErrorMessage: ''
+  verificationCode: ''
 });
 
 watch(
@@ -178,15 +125,6 @@ onMounted(() => {
 accountGlobal.verifyErrorMessage = '';
 
 async function sendVerificationText() {
-
-
-  let hasAppointment = await bookGlobal.hasAppointmentByPhone(state.mobileNumber);
-
-  if (hasAppointment === true) {
-    accountGlobal.verifyErrorMessage = 'There is another appointment booked under this phone number, please call 614-538-5800 to adjust your appointment.';
-    return;
-  }
-
   let didSend = await accountGlobal.sendVerificationText(state.mobileNumber);
   if (didSend) {
     accountGlobal.verifyStep = 'code'
@@ -234,33 +172,6 @@ function retry() {
   accountGlobal.verifyStep = 'text';
 }
 
-async function login() {
-  state.loginErrorMessage = ''
-
-  if (state.email === '') {
-    state.loginErrorMessage = 'Email cannot be blank';
-    return;
-  } else if (state.password === '') {
-    state.loginErrorMessage = 'Password cannot be blank';
-    return;
-  }
-
-  let customer = await putCustomerLogin(state.email, state.password);
-
-  if (customer.customerId === 0) {
-    state.loginErrorMessage = 'Login Failed';
-    return;
-  }
-
-  accountGlobal.customerCode = customer.customerCode;
-
-  accountGlobal.verifySuccess = true;
-  accountGlobal.loginSuccessful = true;
-
-  accountGlobal.showVerify = false;
-
-  emit('didVerify', true);
-}
 
 </script>
 
