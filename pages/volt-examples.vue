@@ -89,10 +89,6 @@
 <script setup>
 import Checkbox from '@/volt/Checkbox.vue';
 import InputText from '@/volt/InputText.vue';
-import Accordion from '@/volt/Accordion.vue';
-import AccordionPanel from '@/volt/AccordionPanel.vue';
-import AccordionHeader from '@/volt/AccordionHeader.vue';
-import AccordionContent from '@/volt/AccordionContent.vue';
 import Popover from '@/volt/Popover.vue';
 import Select from '@/volt/Select.vue';
 

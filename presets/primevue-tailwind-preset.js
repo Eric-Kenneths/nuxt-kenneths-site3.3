@@ -29,6 +29,33 @@ const PrimeVueTailwindPreset = {
     pcBadge: {
       root: `min-w-4 h-4 leading-4 bg-primary-contrast rounded-full text-primary text-xs font-bold`
     }
+  },
+  accordion: {
+    root: ``
+  },
+  accordionpanel: {
+    root: `flex flex-col border-b border-surface-400`
+  },
+  accordionheader: {
+    root: `cursor-pointer disabled:pointer-events-none disabled:opacity-60 flex items-center justify-between p-[1.125rem] font-semibold
+        bg-primary-100
+        text-surface-500
+        hover:text-surface-700
+        p-active:text-surface-700
+        transition-colors duration-200
+        focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-[-1px] focus-visible:outline-primary`
+  },
+  accordioncontent: {
+    root: `flex flex-col`,
+    content: `bg-primary-100 text-surface-700 pt-0 px-[1.125rem] pb-[1.125rem]`,
+    transition: {
+      enterFromClass: 'max-h-0',
+      enterActiveClass: 'overflow-hidden transition-[max-height] duration-1000 ease-[cubic-bezier(0.42,0,0.58,1)]',
+      enterToClass: 'max-h-[1000px]',
+      leaveFromClass: 'max-h-[1000px]',
+      leaveActiveClass: 'overflow-hidden transition-[max-height] duration-[450ms] ease-[cubic-bezier(0,1,0,1)]',
+      leaveToClass: 'max-h-0'
+    }
   }
 }
 

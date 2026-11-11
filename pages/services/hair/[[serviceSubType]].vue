@@ -382,10 +382,6 @@ import { computed } from 'vue'
 import { appGlobal } from '~/composables/appGlobal'
 import { dataGlobal } from '~/composables/dataGlobal'
 
-import Accordion from '@/volt/Accordion.vue'
-import AccordionPanel from '@/volt/AccordionPanel.vue'
-import AccordionHeader from '@/volt/AccordionHeader.vue'
-import AccordionContent from '@/volt/AccordionContent.vue'
 
 const route = useRoute()
 

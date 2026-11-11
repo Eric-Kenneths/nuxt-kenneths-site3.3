@@ -38,8 +38,9 @@ export default defineNuxtConfig({
   // Only components already moved off volt/ are registered here; add each one as it moves.
   primevue: {
     options: { unstyled: true },
+    loadStyles: false,
     importPT: { as: 'PrimeVueTailwindPreset', from: fileURLToPath(new URL('./presets/primevue-tailwind-preset.js', import.meta.url)) },
-    components: { include: ['Button', 'Toast'] }
+    components: { include: ['Button', 'Toast', 'Accordion', 'AccordionPanel', 'AccordionHeader', 'AccordionContent'] }
   },
   gtag: {
     id: 'G-2C8BCH5WD0',

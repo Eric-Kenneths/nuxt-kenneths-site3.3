@@ -21,10 +21,6 @@
 </template>
 
 <script setup>
-import Accordion from '@/volt/Accordion.vue';
-import AccordionPanel from '@/volt/AccordionPanel.vue';
-import AccordionHeader from '@/volt/AccordionHeader.vue';
-import AccordionContent from '@/volt/AccordionContent.vue';
 
 const { faqData } = defineProps(["faq-data"]);
 </script>
