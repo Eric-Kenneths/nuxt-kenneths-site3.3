@@ -68,7 +68,7 @@
                                         are
                                         offered, are subject to change. Call our appointment scheduling at
                                         <a href="tel:6145385800" class="underline">614.538.5800</a> or use our
-                                        <a href="/book" class="underline">online booking</a> system to confirm.
+                                        <BookNowButton class="underline">online booking</BookNowButton> system to confirm.
                                     </em>
                                 </div>
                             </div>

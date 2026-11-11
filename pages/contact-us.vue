@@ -76,30 +76,13 @@
 
                             <div class="k-para-text font-semibold">
                                 <ClientOnly>
-                                    <pop-up-menu>
-                                        <template #trigger>
-                                            <span
-                                                class="inline-block py-2 px-6 rounded-3xl bg-primary-500 text-primary-900 text-xl font-normal hover:bg-primary-emphasis whitespace-nowrap text-center">
-                                                Book Your Appointment &rarr;
-                                            </span>
-                                        </template>
-                                        <template #links>
-                                            <div class="sans-serif p-3">
-                                                <a class="k-para-text link" href="https://kenneths.com/app/">Existing
-                                                    Customer</a>
-                                            </div>
-                                            <div class="sans-serif p-3">
-                                                <a class="k-para-text link" href="/book/new/service-type">New
-                                                    Customer</a>
-                                            </div>
-                                        </template>
-                                    </pop-up-menu>
+                                    <BookNowButton class="inline-block py-2 px-6 rounded-3xl bg-primary-500 text-primary-900 text-xl font-normal hover:bg-primary-emphasis whitespace-nowrap text-center">Book Your Appointment &rarr;</BookNowButton>
 
                                     <template #fallback>
-                                        <a href="/book/new/service-type"
+                                        <BookNowButton
                                             class="inline-block py-2 px-6 rounded-3xl bg-primary-500 text-primary-900 text-xl font-normal hover:bg-primary-emphasis whitespace-nowrap text-center">
                                             Book Your Appointment &rarr;
-                                        </a>
+                                        </BookNowButton>
                                     </template>
                                 </ClientOnly>
                             </div>

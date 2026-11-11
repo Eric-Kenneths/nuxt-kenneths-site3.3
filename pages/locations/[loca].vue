@@ -20,22 +20,7 @@
                     solo for a self-care recharge.
                 </p>
                 <p>
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 font-bold">
-                                {{ locationData.bookingText }}</div>
-                        </template>
-                        <template #links>
-                            <div class="sans-serif p-3 k-section-link">
-                                <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                            </div>
-                            <div class="sans-serif p-3 k-section-link">
-                                <a class="text-xl link" :href="'/book/new/promo?fl=' + state.location.locationCode">New
-                                    Customer</a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                    <BookNowButton class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 font-bold" :query="'fl=' + state.location.locationCode">{{ locationData.bookingText }}</BookNowButton>
                 </p>
             </div>
         </div>
@@ -227,7 +212,7 @@ let locationData = {
     latitude: state.location.latitude,
     longitude: state.location.longitude,
     directionsUrl: state.location.directionsUrl,
-    bookingUrl: '/book/new/promo?fl=' + locationParam
+    bookingQuery: 'fl=' + locationParam
 }
 
 // console.log(locationData)

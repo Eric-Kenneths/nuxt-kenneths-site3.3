@@ -95,42 +95,7 @@
                     <p class="mt-1 leading-snug flex-1" v-text="service.serviceText" />
 
                     <!-- BOOK NOW pinned at the bottom, content width only -->
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer">
-                                BOOK NOW
-                            </div>
-                        </template>
-
-                        <template #links>
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="https://kenneths.com/app/">
-                                    <span aria-hidden="true">
-                                        Existing Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" :href="'/book/new/promo?s=' + service.serviceCode">
-                                    <span aria-hidden="true">
-                                        New Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                    <BookNowButton class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer inline-block" :query="'s=' + service.serviceCode">BOOK NOW <span class="sr-only">booking for {{ service.serviceDescription }}</span></BookNowButton>
                 </div>
             </div>
         </section>
@@ -162,42 +127,7 @@
                     <p class="mt-1 leading-snug flex-1" v-text="service.serviceText" />
 
                     <!-- BOOK NOW pinned at the bottom, content width only -->
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer">
-                                BOOK NOW
-                            </div>
-                        </template>
-
-                        <template #links>
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="https://kenneths.com/app/">
-                                    <span aria-hidden="true">
-                                        Existing Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" :href="'/book/new/promo?s=' + service.serviceCode">
-                                    <span aria-hidden="true">
-                                        New Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                    <BookNowButton class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer inline-block" :query="'s=' + service.serviceCode">BOOK NOW <span class="sr-only">booking for {{ service.serviceDescription }}</span></BookNowButton>
                 </div>
             </div>
         </section>
@@ -229,42 +159,7 @@
                     <p class="mt-1 leading-snug flex-1" v-text="service.serviceText" />
 
                     <!-- BOOK NOW pinned at the bottom, content width only -->
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer">
-                                BOOK NOW
-                            </div>
-                        </template>
-
-                        <template #links>
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="https://kenneths.com/app/">
-                                    <span aria-hidden="true">
-                                        Existing Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" :href="'/book/new/promo?s=' + service.serviceCode">
-                                    <span aria-hidden="true">
-                                        New Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                    <BookNowButton class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer inline-block" :query="'s=' + service.serviceCode">BOOK NOW <span class="sr-only">booking for {{ service.serviceDescription }}</span></BookNowButton>
                 </div>
             </div>
         </section>
@@ -321,40 +216,7 @@
                         looking and feeling great.
                     </p>
 
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="hover:text-primary-500 k-sub-section-title font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">
-                                Book Your Spa Experience →
-                            </div>
-                        </template>
-
-                        <template #links>
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="https://kenneths.com/app/">
-                                    <span aria-hidden="true">
-                                        Existing Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for spa services
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="/book/new/service-type">
-                                    <span aria-hidden="true">
-                                        New Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for spa services
-                                    </span>
-                                </a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                    <BookNowButton class="hover:text-primary-500 k-sub-section-title font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">Book Your Spa Experience → <span class="sr-only">booking for spa services</span></BookNowButton>
                 </div>
             </div>
 

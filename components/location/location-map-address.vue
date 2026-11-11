@@ -46,21 +46,7 @@
 
             <!-- Bottom Div: Bottom Aligned Text -->
             <div class="flex items-end pb-5 md:pb-10">
-                <pop-up-menu>
-                    <template #trigger>
-                        <div
-                            class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 font-bold">
-                            {{ locationData.bookingText }}</div>
-                    </template>
-                    <template #links>
-                        <div class="sans-serif p-3 k-section-link">
-                            <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                        </div>
-                        <div class="sans-serif p-3 k-section-link">
-                            <a class="text-xl link" :href="locationData.bookingUrl">New Customer</a>
-                        </div>
-                    </template>
-                </pop-up-menu>
+                <BookNowButton class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 font-bold" :query="locationData.bookingQuery">{{ locationData.bookingText }}</BookNowButton>
             </div>
         </div>
     </section>

@@ -41,33 +41,12 @@
               Call us at
               <a href="tel:614-538-5800" class="underline">614-538-5800</a>
               or
-              <a href="https://kenneths.com/app/" class="underline">book online</a>
+              <BookNowButton class="underline">book online</BookNowButton>
               {{ postGroupText.cta }}
             </p>
 
             <div class="mt-4 flex justify-center">
-              <pop-up-menu>
-                <template #trigger>
-                  <div
-                    class="inline-block w-38 py-2 px-3 rounded-3xl bg-primary-900 text-primary-100 hover:bg-primary-emphasis whitespace-nowrap text-center cursor-pointer transition">
-                    Book Now
-                  </div>
-                </template>
-
-                <template #links>
-                  <div class="sans-serif p-3 text-left">
-                    <a class="text-xl link block" href="https://kenneths.com/app/">
-                      Existing Customer
-                    </a>
-                  </div>
-
-                  <div class="sans-serif p-3 text-left">
-                    <a class="text-xl link block" href="/book/new/service-type">
-                      New Customer
-                    </a>
-                  </div>
-                </template>
-              </pop-up-menu>
+              <BookNowButton class="inline-block w-38 py-2 px-3 rounded-3xl bg-primary-900 text-primary-100 hover:bg-primary-emphasis whitespace-nowrap text-center cursor-pointer transition">Book Now</BookNowButton>
             </div>
           </div>
         </div>

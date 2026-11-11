@@ -74,13 +74,11 @@
                   <div class="mt-1.5 mb-2">
                     Please call 614-538-5800 to schedule and be sure to mention
                     code {{ result.matchCode }} when scheduling to claim offer or&nbsp;
-                    <a
+                    <BookNowButton
                       class="underline text-blue-500"
-                      :aria-label="'Book Now Online with ' + result.alias + ' with code: ' + result.matchCode"
-                      :href="'/book/new/promo?mid=2&mc=' + result.matchCode + '&qti=' + mhhGlobal.tracking.trackingId + '&c=' + state.mhhCustId"
-                    >
+                      :aria-label="'Book Now Online with ' + result.alias + ' with code: ' + result.matchCode" :query="'mid=2&mc=' + result.matchCode + '&qti=' + mhhGlobal.tracking.trackingId + '&c=' + state.mhhCustId">
                       Book Now Online
-                    </a>.
+                    </BookNowButton>.
                     &nbsp;Expires {{ result.expirationDate }}
                   </div>
 
@@ -168,13 +166,11 @@
                   </div>
 
                   <div class="text-[1rem] md:text-[1.25rem]">
-                    <a
+                    <BookNowButton
                       class="underline text-blue-500"
-                      :aria-label="'Book Now with ' + result.alias + ' with code: ' + result.matchCode"
-                      :href="'/book/new/promo?mid=2&mc=' + result.matchCode + '&qti=' + mhhGlobal.tracking.trackingId + '&c=' + state.mhhCustId"
-                    >
+                      :aria-label="'Book Now with ' + result.alias + ' with code: ' + result.matchCode" :query="'mid=2&mc=' + result.matchCode + '&qti=' + mhhGlobal.tracking.trackingId + '&c=' + state.mhhCustId">
                       Book Now
-                    </a>
+                    </BookNowButton>
                   </div>
 
                   <p

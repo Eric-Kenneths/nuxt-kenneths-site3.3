@@ -228,12 +228,12 @@
 
             <!-- Bottom links -->
             <div class="mt-auto flex flex-col items-start pt-8">
-                <a href="https://kenneths.com/app/" aria-label="Book an Academy Appointment at Kenneth's Academy"
+                <BookNowButton aria-label="Book an Academy Appointment at Kenneth's Academy"
                     title="Book an Academy Appointment at Kenneth's Academy"
                     class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block">
                     <span aria-hidden="true">BOOK NOW →</span>
                     <span class="sr-only">Book an Academy Appointment at Kenneth's Academy</span>
-                </a>
+                </BookNowButton>
 
                 <a href="/locations/academy" aria-label="Learn More About Kenneth's Academy Location"
                     title="Learn More About Kenneth's Academy Location"

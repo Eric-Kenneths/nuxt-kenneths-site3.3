@@ -68,23 +68,7 @@
                     our mission is simple: to help you feel like the best version of yourself.
                 </p>
 
-                <pop-up-menu class="inline-block mt-2">
-                    <template #trigger>
-                        <div
-                            class="hover:text-primary-500 k-section-link font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block">
-                            Book Online →
-                        </div>
-                    </template>
-
-                    <template #links>
-                        <div class="sans-serif p-3">
-                            <a class="text-2xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                        </div>
-                        <div class="sans-serif p-3">
-                            <a class="text-2xl link" href="/book/new/service-type">New Customer</a>
-                        </div>
-                    </template>
-                </pop-up-menu>
+                <BookNowButton class="hover:text-primary-500 k-section-link font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">Book Online →</BookNowButton>
             </div>
         </div>
 
@@ -278,7 +262,7 @@
             <div class="flex flex-col items-center md:items-start">
                 <img src="/images/services/gift-card-services.webp" alt="Gift card services"
                     class="w-full object-cover mx-auto" loading="lazy" decoding="async" fetchpriority="low" />
-                <a href="/shop/gift-cards"
+                <a :href="giftCardsUrl()" rel="noopener"
                     class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded inline-block mt-2 font-bold uppercase self-start">
                     Gift Card
                 </a>
@@ -317,6 +301,7 @@
 </template>
 
 <script setup>
+const { giftCardsUrl } = useZenotiLinks()
 const jsonLD = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',

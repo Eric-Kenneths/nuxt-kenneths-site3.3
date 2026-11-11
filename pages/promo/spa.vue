@@ -20,11 +20,11 @@
                         </p>
 
                         <div class="mt-6">
-                            <a href="/book/new/promo?d=dfv"
+                            <BookNowButton
                                 class="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-primary-900 px-6 py-3 k-section-link uppercase tracking-wide text-primary-100 shadow-md transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                                aria-label="Book your spa appointment online with the 20 percent off offer">
+                                aria-label="Book your spa appointment online with the 20 percent off offer" query="d=dfv">
                                 Book Your Appointment Online
-                            </a>
+                            </BookNowButton>
                         </div>
                     </div>
 
@@ -131,11 +131,11 @@
                 </h2>
 
                 <div class="mt-6">
-                    <a href="/book/new/promo?d=dfv"
+                    <BookNowButton
                         class="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-primary-100 px-6 py-3 k-section-link uppercase tracking-wide text-primary-900 shadow-md transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900"
-                        aria-label="Book online now for your first spa appointment and receive 20 percent off">
+                        aria-label="Book online now for your first spa appointment and receive 20 percent off" query="d=dfv">
                         Book Online Now
-                    </a>
+                    </BookNowButton>
                 </div>
             </section>
 
@@ -152,11 +152,11 @@
                 </p>
 
                 <div class="mt-6">
-                    <a href="/book/new/promo?d=dfv"
+                    <BookNowButton
                         class="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-primary-900 px-6 py-3 k-section-link uppercase tracking-wide text-primary-100 shadow-md transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                        aria-label="Start your spa booking">
+                        aria-label="Start your spa booking" query="d=dfv">
                         Start Your Booking
-                    </a>
+                    </BookNowButton>
                 </div>
             </section>
         </div>
@@ -164,6 +164,7 @@
 </template>
 
 <script setup>
+const { bookUrl } = useZenotiLinks()
 import { ref } from 'vue'
 
 useHead({
@@ -182,42 +183,42 @@ const services = ref([
         title: 'Facials',
         description: 'Rejuvenate and refresh with advanced treatments for radiant skin.',
         image: '/images/promo/spa/facial-promo.webp',
-        buttonLink: '/book/new/promo?d=dfv&v=esthetic',
+        buttonLink: bookUrl('d=dfv&v=esthetic'),
         buttonText: 'Book a Facial',
     },
     {
         title: 'Head Spa',
         description: 'Experience the luxury of scalp rejuvenation with our Japanese Head Spa.',
         image: '/images/promo/spa/headspa-promo.webp',
-        buttonLink: '/book/new/promo?d=dfv&v=bar',
+        buttonLink: bookUrl('d=dfv&v=bar'),
         buttonText: 'Book a Head Spa',
     },
     {
         title: 'Manicures',
         description: 'Flawless nails and indulgent care with our precision manicures.',
         image: '/images/promo/spa/manicure-promo.webp',
-        buttonLink: '/book/new/promo?d=dfv&v=nail',
+        buttonLink: bookUrl('d=dfv&v=nail'),
         buttonText: 'Book a Manicure',
     },
     {
         title: 'Pedicures',
         description: 'Pamper your feet and restore balance with our spa pedicures.',
         image: '/images/promo/spa/pedicure-promo.webp',
-        buttonLink: '/book/new/promo?d=dfv&v=nail',
+        buttonLink: bookUrl('d=dfv&v=nail'),
         buttonText: 'Book a Pedicure',
     },
     {
         title: 'Waxing',
         description: 'Smooth, confident results with expert waxing services.',
         image: '/images/promo/spa/waxing-promo.webp',
-        buttonLink: '/book/new/promo?d=dfv&v=wax',
+        buttonLink: bookUrl('d=dfv&v=wax'),
         buttonText: 'Book a Waxing',
     },
     {
         title: 'Massage',
         description: 'Relax and release stress with our therapeutic and luxury massage sessions.',
         image: '/images/promo/spa/massage-promo.webp',
-        buttonLink: '/book/new/promo?d=dfv&v=massage',
+        buttonLink: bookUrl('d=dfv&v=massage'),
         buttonText: 'Book a Massage',
     },
 ])

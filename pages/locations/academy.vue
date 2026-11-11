@@ -25,11 +25,11 @@
                     our other salons, but at a discounted rate. It's an incredible value with no compromise on quality.
                 </div>
 
-                <a href="https://kenneths.com/app/"
+                <BookNowButton
                     class="hover:text-primary-500 k-section-link font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">
                     <span aria-hidden="true">Book Now @ The Academy Salon →</span>
                     <span class="sr-only">Book now at Kenneth's Academy Salon</span>
-                </a>
+                </BookNowButton>
             </div>
 
         </div>
@@ -67,11 +67,11 @@
                 </div>
 
                 <div>
-                    <a href="https://kenneths.com/app/"
+                    <BookNowButton
                         class="hover:text-primary-500 k-section-link font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">
                         <span aria-hidden="true">Book Now →</span>
                         <span class="sr-only">Book now at Kenneth's Academy Salon</span>
-                    </a>
+                    </BookNowButton>
 
                 </div>
                 <div class="hidden">
@@ -101,13 +101,6 @@
                 Our Model Program helps our earlier-stage trainees refine their skills under the supervision of expert
                 instructors. Model appointments are offered at an even greater discount than our Academy Appointments,
                 and take place in a classroom setting under the supervision of our expert instructors.
-            </p>
-            <p class="pt-5">
-                <a href="/model"
-                    class="mt-2 self-start px-5 py-2 rounded-3xl k-section-link bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer">
-                    <span aria-hidden="true">Learn More</span>
-                    <span class="sr-only"> about Kenneth's model program for trainees</span>
-                </a>
             </p>
         </div>
     </section>
@@ -158,7 +151,7 @@ let locationData = {
     state: 'OH',
     zipCode: '43220',
     bookingText: 'Book Now →',
-    bookingUrl: 'https://kenneths.com/app/',
+    bookingQuery: '',
     directionsUrl: 'https://maps.google.com/?q=5151+Reed+Rd+Suite+110B,+Columbus,+OH+43220'
 }
 

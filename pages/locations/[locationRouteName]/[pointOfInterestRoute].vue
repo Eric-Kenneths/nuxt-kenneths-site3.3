@@ -35,7 +35,7 @@
                         <div class="p-1">{{ state.location.address }}</div>
                         <div class="p-1">{{ state.location.cityState }}</div>
                         <div class="p-1"><a href="tel:6145385800">614.538.5800</a></div>
-                        <div class="p-1"><a href="/book">Book An Appointment</a></div>
+                        <div class="p-1"><BookNowButton>Book An Appointment</BookNowButton></div>
                         <div class="mt-4">
                             <LocationServices :locationServices="state.locationService"
                                 :locationCode="state.location?.locationCode" />
@@ -58,7 +58,7 @@
                         <div class="p-1">{{ state.location.address }}</div>
                         <div class="p-1">{{ state.location.cityState }}</div>
                         <div class="p-1"><a href="tel:6145385800">614.538.5800</a></div>
-                        <div class="p-1"><a href="/book">Book An Appointment</a></div>
+                        <div class="p-1"><BookNowButton>Book An Appointment</BookNowButton></div>
                         <div class="mt-4">
                             <LocationServices :locationServices="state.locationService"
                                 :locationCode="state.location?.locationCode" />

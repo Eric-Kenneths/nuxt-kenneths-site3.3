@@ -17,11 +17,11 @@
                         </p>
 
                         <div class="mt-6">
-                            <a href="/book/new/promo?d=dfv&p=b&s=FYH&l=pl&x=f"
+                            <BookNowButton
                                 class="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-primary-900 px-6 py-3 k-section-link uppercase tracking-wide text-primary-100 shadow-md transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                                aria-label="Book now and save 20 percent on your first Japanese Head Spa visit">
+                                aria-label="Book now and save 20 percent on your first Japanese Head Spa visit" query="d=dfv&p=b&s=FYH&l=pl&x=f">
                                 Book Now - Save 20%
-                            </a>
+                            </BookNowButton>
                         </div>
                     </div>
 
@@ -111,11 +111,11 @@
                 </p>
 
                 <div class="mt-6">
-                    <a href="/book/new/promo?d=dfv&p=b&s=FYH&dsl=y&x=f&bps=y"
+                    <BookNowButton
                         class="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-primary-900 px-6 py-3 k-section-link uppercase tracking-wide text-primary-100 shadow-md transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                        aria-label="Book now and save 20 percent, with bps parameter enabled">
+                        aria-label="Book now and save 20 percent, with bps parameter enabled" query="d=dfv&p=b&s=FYH&dsl=y&x=f&bps=y">
                         Book Now - Save 20%
-                    </a>
+                    </BookNowButton>
                 </div>
             </section>
 

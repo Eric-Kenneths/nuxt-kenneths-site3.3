@@ -149,22 +149,17 @@
         aria-labelledby="services-offered-heading">
         <header>
             <h2 id="services-offered-heading" class="text-2xl md:text-4xl uppercase mb-1">
-                Services Offered
+                Book with {{ technician.emalias }}
             </h2>
             <p class="md:text-lg mb-3 px-3">
-                To book services with {{ technician.emalias }}, please select from the options below.
+                Choose your services and time in our online booking.
             </p>
         </header>
 
-        <book-services :showPricingPopup="false" />
-
-        <p v-if="state.bookingErrorMessage !== ''" class="text-red-500 font-bold mb-2 md:text-lg" role="alert">
-            {{ state.bookingErrorMessage }}
-        </p>
-
-        <Button label="Continue to Booking"
-            class="uppercase bg-primary-900 !text-primary-100 !hover:bg-primary-500 px-10"
-            @click="continueToBooking()" />
+        <BookNowButton :query="bookingQuery"
+            class="inline-block uppercase bg-primary-900 text-primary-100 hover:bg-primary-500 px-10 py-2 rounded-3xl">
+            Continue to Booking
+        </BookNowButton>
     </section>
 
     <section v-else aria-label="Academy booking information">
@@ -175,10 +170,8 @@
 <script setup>
 import { computed } from 'vue'
 import { appGlobal } from '~/composables/appGlobal';
-import { bookGlobal } from '~/composables/bookGlobal';
 import { useLocalStorage } from '~/composables/useLocalStorage';
 
-import Button from '@/volt/Button';
 const route = useRoute();
 const router = useRouter();
 
@@ -195,13 +188,9 @@ const alias = computed(() => {
 const { getLastPageB4Profile } = useLocalStorage();
 
 const state = reactive({
-    bookingLink: '',
     lastPage: '',
-    bookingErrorMessage: '',
     location: {}
 });
-
-bookGlobal.showLocationFilter = false;
 
 const locationParam = computed(() => {
     if (location.value === 'polaris') return 'PL';
@@ -378,8 +367,6 @@ const showPreviousReview = () => {
 const showNextReview = () => {
     if (currentReviewIndex.value < technicianReviews.value.length - 1) currentReviewIndex.value++;
 };
-
-bookGlobal.clearBookingData();
 
 const canonicalUrl = `https://kenneths.com${route.path}`
 const pageId = `${canonicalUrl}#webpage`;
@@ -689,30 +676,15 @@ useHead({
     ]
 })
 
-const servicesUrl = computed(() =>
-    appGlobal.apiBaseUrl +
-    '/khsds/WebBookServices/PROFILE/E/A/A/' +
-    technician.value.technicianCode +
-    '/' +
-    technician.value.locationCode
+// Preset booking codes; Zenoti does not read these yet.
+const bookingQuery = computed(
+    () =>
+        'd=DFV&t=' +
+        technician.value.technicianCode +
+        '&l=' +
+        technician.value.locationCode +
+        '&bps=y'
 );
-
-const { data: services, error: error2 } = await useFetch(servicesUrl, {
-    default: () => []
-});
-
-state.bookingLink =
-    '/book/new/promo?d=DFV&t=' +
-    technician.value.technicianCode +
-    '&l=' +
-    technician.value.locationCode +
-    '&bps=y';
-
-bookGlobal.serviceGroups = services.value || [];
-
-bookGlobal.generateBarAddonGroups();
-bookGlobal.setServiceGroupVisible();
-bookGlobal.setShowServiceGroupWhenListExists();
 
 onMounted(async () => {
     state.lastPage = await getLastPageB4Profile();
@@ -726,22 +698,6 @@ function goBack() {
     window.history.go(-1);
 }
 
-function continueToBooking() {
-    state.bookingErrorMessage = '';
-
-    if (bookGlobal.getAllServices().length === 0) {
-        state.bookingErrorMessage = 'Please select at least one service to continue to booking.';
-        return;
-    }
-
-    const isMale = bookGlobal.findMaleServices(bookGlobal.getAllServices());
-    const sexParam = isMale ? '&x=M' : '&x=F';
-
-    bookGlobal.clearWebMarketing();
-    bookGlobal.webMarketing.fromRoute = route.fullPath;
-
-    router.push(state.bookingLink + sexParam);
-}
 </script>
 
 <style scoped>

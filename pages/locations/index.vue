@@ -121,38 +121,7 @@
 
                         <div class="mt-5 md:mt-3">
                             <div>
-                                <ClientOnly>
-                                    <pop-up-menu>
-                                        <template #trigger>
-                                            <span
-                                                class="inline-block k-section-link font-bold underline uppercase hover:text-primary-900">
-                                                Book Now<span class="ml-2 relative md:-top-[2px]">&rarr;</span>
-                                            </span>
-                                        </template>
-
-                                        <template #links>
-                                            <div class="sans-serif p-3">
-                                                <a class="k-section-link link" href="https://kenneths.com/app/">
-                                                    Existing Customer
-                                                </a>
-                                            </div>
-
-                                            <div class="sans-serif p-3">
-                                                <a class="k-section-link link"
-                                                    :href="'/book/new/promo?fl=' + location.locationCode">
-                                                    New Customer
-                                                </a>
-                                            </div>
-                                        </template>
-                                    </pop-up-menu>
-
-                                    <template #fallback>
-                                        <a :href="'/book/new/promo?fl=' + location.locationCode"
-                                            class="k-section-link font-bold underline uppercase hover:text-primary-900">
-                                            Book Now
-                                        </a>
-                                    </template>
-                                </ClientOnly>
+                                <BookNowButton class="inline-block k-section-link font-bold underline uppercase hover:text-primary-900" :query="'fl=' + location.locationCode">Book Now<span class="ml-2 relative md:-top-[2px]">&rarr;</span></BookNowButton>
                             </div>
 
                             <p class="pt-4 pb-4">

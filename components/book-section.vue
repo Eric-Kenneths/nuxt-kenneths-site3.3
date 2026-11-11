@@ -6,22 +6,7 @@
             </p>
 
             <div>
-                <pop-up-menu>
-                    <template #trigger>
-                        <span
-                            class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 font-bold">
-                            BOOK ONLINE &rarr;
-                        </span>
-                    </template>
-                    <template #links>
-                        <div class="sans-serif p-3 k-section-link">
-                            <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                        </div>
-                        <div class="sans-serif p-3 k-section-link">
-                            <a class="text-xl link" href="/book/new/service-type">New Customer</a>
-                        </div>
-                    </template>
-                </pop-up-menu>
+                <BookNowButton class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 font-bold">BOOK ONLINE &rarr;</BookNowButton>
             </div>
         </div>
     </section>

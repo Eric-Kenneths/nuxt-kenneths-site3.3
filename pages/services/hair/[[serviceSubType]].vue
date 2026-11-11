@@ -109,44 +109,9 @@
                     </p>
 
                     <!-- BOOK NOW pinned at the bottom, content width only -->
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer">
-                                BOOK NOW
-                            </div>
-                        </template>
-
-                        <template #links>
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="https://kenneths.com/app/">
-                                    <span aria-hidden="true">
-                                        Existing Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" :href="'/book/new/promo?s=' +
+                    <BookNowButton class="w-40 mt-2 self-start text-center py-2 rounded-3xl bg-primary-500 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap cursor-pointer inline-block" :query="'s=' +
                                     service.serviceCode
-                                    ">
-                                    <span aria-hidden="true">
-                                        New Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for
-                                        {{ service.serviceDescription }}
-                                    </span>
-                                </a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                                    ">BOOK NOW <span class="sr-only">booking for {{ service.serviceDescription }}</span></BookNowButton>
                 </div>
             </div>
         </section>
@@ -204,40 +169,7 @@
                         exactly what you need.
                     </p>
 
-                    <pop-up-menu>
-                        <template #trigger>
-                            <div
-                                class="hover:text-primary-500 k-sub-section-title font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">
-                                Book your hair appointment →
-                            </div>
-                        </template>
-
-                        <template #links>
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="https://kenneths.com/app/">
-                                    <span aria-hidden="true">
-                                        Existing Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for hair services
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="sans-serif p-3">
-                                <a class="text-xl link" href="/book/new/service-type">
-                                    <span aria-hidden="true">
-                                        New Customer
-                                    </span>
-
-                                    <span class="sr-only">
-                                        booking for hair services
-                                    </span>
-                                </a>
-                            </div>
-                        </template>
-                    </pop-up-menu>
+                    <BookNowButton class="hover:text-primary-500 k-sub-section-title font-bold underline uppercase underline-offset-4 transition rounded py-3 inline-block mt-2">Book your hair appointment → <span class="sr-only">booking for hair services</span></BookNowButton>
                 </div>
             </div>
 
@@ -337,7 +269,7 @@
             </div>
 
             <div class="flex items-end justify-start">
-                <a href="https://kenneths.com/app/"
+                <BookNowButton
                     class="hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded inline-block mt-2 font-bold uppercase">
                     <span aria-hidden="true">
                         Book Now &rarr;
@@ -346,7 +278,7 @@
                     <span class="sr-only">
                         at Kenneth's Academy Salon
                     </span>
-                </a>
+                </BookNowButton>
             </div>
 
             <div class="flex items-end justify-start">
@@ -385,7 +317,7 @@
             </div>
 
             <div class="flex items-end justify-start">
-                <a href="/model"
+                <a href="/locations/academy"
                     class="pb-6 hover:text-primary-700 k-section-link underline underline-offset-4 transition rounded inline-block mt-2 font-bold uppercase">
                     <span aria-hidden="true">
                         Learn More

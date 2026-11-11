@@ -106,21 +106,7 @@
 
         <!-- Bottom Div: Bottom Aligned Text -->
         <div class="flex items-start pt-3">
-          <pop-up-menu>
-            <template #trigger>
-              <div
-                class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2">
-                BOOK YOUR APPOINTMENT &rarr;</div>
-            </template>
-            <template #links>
-              <div class="sans-serif p-3">
-                <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-              </div>
-              <div class="sans-serif p-3">
-                <a class="text-xl link" href="/book/new/service-type">New Customer</a>
-              </div>
-            </template>
-          </pop-up-menu>
+          <BookNowButton class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2">BOOK YOUR APPOINTMENT &rarr;</BookNowButton>
         </div>
       </div>
     </section>
@@ -165,21 +151,7 @@
 
         <!-- Middle Div: Bottom Aligned Text -->
         <div class="flex items-end">
-          <pop-up-menu>
-            <template #trigger>
-              <div
-                class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2">
-                BOOK NOW @ POLARIS + HILLIARD &rarr;</div>
-            </template>
-            <template #links>
-              <div class="sans-serif p-3">
-                <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-              </div>
-              <div class="sans-serif p-3">
-                <a class="text-xl link" href="/book/new/promo?l=pl">New Customer</a>
-              </div>
-            </template>
-          </pop-up-menu>
+          <BookNowButton class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2" query="l=pl">BOOK NOW @ POLARIS + HILLIARD &rarr;</BookNowButton>
         </div>
 
         <!-- Bottom Div: Bottom Aligned Text -->
@@ -274,22 +246,7 @@
             Book Your Beauty<br />Experience
           </p>
           <div>
-            <pop-up-menu>
-              <template #trigger>
-                <div
-                  class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 k-menu-text-shadow">
-                  BOOK
-                  ONLINE &rarr;</div>
-              </template>
-              <template #links>
-                <div class="sans-serif p-3">
-                  <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                </div>
-                <div class="sans-serif p-3">
-                  <a class="text-xl link" href="/book/new/service-type">New Customer</a>
-                </div>
-              </template>
-            </pop-up-menu>
+            <BookNowButton class="hover:text-primary-500 k-section-link underline underline-offset-4 transition rounded py-3 inline-block mt-2 k-menu-text-shadow">BOOK ONLINE &rarr;</BookNowButton>
           </div>
         </div>
       </div>

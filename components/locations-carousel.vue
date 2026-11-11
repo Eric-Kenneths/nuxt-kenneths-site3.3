@@ -52,21 +52,7 @@
                             <div class="my-2">
                                 <a href="tel:6145385800">(614) 538-5800</a>
                             </div>
-                            <pop-up-menu>
-                                <template #trigger>
-                                    <div
-                                        class="hover:text-primary-500 text-lg md:text-xl underline font-bold underline-offset-4 transition rounded py-3 inline-block">
-                                        BOOK NOW</div>
-                                </template>
-                                <template #links>
-                                    <div class="sans-serif p-3">
-                                        <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                                    </div>
-                                    <div class="sans-serif p-3">
-                                        <a class="text-xl link" :href="'/book/new/promo?fl=' + loc.locationCode">New Customer</a>
-                                    </div>
-                                </template>
-                            </pop-up-menu>
+                            <BookNowButton class="hover:text-primary-500 text-lg md:text-xl underline font-bold underline-offset-4 transition rounded py-3 inline-block" :query="'fl=' + loc.locationCode">BOOK NOW</BookNowButton>
 
                         </div>
                     </article>

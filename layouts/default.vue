@@ -16,22 +16,7 @@
                 (614) 538-5800
               </a>
 
-              <pop-up-menu>
-                <template #trigger>
-                  <div
-                    class="px-5 py-2 cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap">
-                    Make an Appointment
-                  </div>
-                </template>
-                <template #links>
-                  <div class="sans-serif p-3">
-                    <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                  </div>
-                  <div class="sans-serif p-3">
-                    <a class="text-xl link" href="/book/new/service-type">New Customer</a>
-                  </div>
-                </template>
-              </pop-up-menu>
+              <BookNowButton class="px-5 py-2 cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap inline-block">Make an Appointment</BookNowButton>
 
               <a href="/locations"
                 class="px-5 py-2 cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap hidden lg:inline-flex">
@@ -41,7 +26,6 @@
 
             <div class="hidden lg:flex items-center gap-3 ml-0.5">
               <!-- <img class="h-8" src="/images/icons/user-dark.webp" alt="Login" /> -->
-              <gift-card-cart-icon class="relative" />
 
               <!-- Shopping Bag (Desktop) -->
               <button class="relative inline-flex items-center justify-center cursor-pointer" @click="openCart">
@@ -85,7 +69,7 @@
           <div class="items-center space-x-6 ml-auto hidden lg:flex">
             <a href="/about" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Our Story</a>
             <a href="/our-team" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Our Team</a>
-            <a href="/shop/gift-cards" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Gift
+            <a :href="giftCardsUrl()" rel="noopener" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Gift
               Cards</a>
             <!-- <img class="h-7 cursor-pointer k-shadow-img" src="/images/icons/search.webp" alt="Search Kenneth's" /> -->
           </div>
@@ -93,7 +77,6 @@
           <!-- Mobile/tablet: Right icons (user, bag, hamburger) -->
           <div class="flex items-center space-x-3 lg:hidden ml-auto">
             <!-- <img src="/images/icons/user-light.webp" class="h-6 k-shadow-img" alt="Login" /> -->
-            <gift-card-cart-icon class="relative" />
             <!-- Shopping Bag (Mobile/Tablet) -->
             <button class="relative cursor-pointer bg-primary-500 rounded py-1 px-2 k-shadow-img" @click="openCart">
               <img src="/images/icons/shopping-bag-light.webp" class="h-6" alt="Shopping Bag">
@@ -172,7 +155,7 @@
                 <a href="/shop/retail/top-sellers" class="text-primary-100 hover:text-primary-emphasis">Products</a>
               </div>
               <div>
-                <a href="/shop/gift-cards" class="text-primary-100 hover:text-primary-emphasis">Gift Cards</a>
+                <a :href="giftCardsUrl()" rel="noopener" class="text-primary-100 hover:text-primary-emphasis">Gift Cards</a>
               </div>
               <div>
                 <a href="/about" class="text-primary-100 hover:text-primary-emphasis">Our Story</a>
@@ -189,21 +172,7 @@
               <div class="pb-5 flex">
 
 
-                <pop-up-menu>
-                  <template #trigger>
-                    <div
-                      class="px-19 py-2 text-center cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap">
-                      Make an Appointment</div>
-                  </template>
-                  <template #links>
-                    <div class="sans-serif p-3">
-                      <a class="text-xl link" href="https://kenneths.com/app/">Existing Customer</a>
-                    </div>
-                    <div class="sans-serif p-3">
-                      <a class="text-xl link" href="/book/new/service-type">New Customer</a>
-                    </div>
-                  </template>
-                </pop-up-menu>
+                <BookNowButton class="px-19 py-2 text-center cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap inline-block">Make an Appointment</BookNowButton>
 
 
               </div>
@@ -292,7 +261,6 @@
       <slot />
     </main>
 
-    <first-timer-coupon-popup />
 
     <footer class="bg-primary-900 text-primary-100 pt-10 pb-4 px-4 max-w-[1600px] mx-auto">
       <div class=" mb-8 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
@@ -331,7 +299,7 @@
         </div>
         <div>
           <ul class="space-y-2">
-            <li><a href="/shop/gift-cards" class="hover:underline">Gift Cards</a></li>
+            <li><a :href="giftCardsUrl()" rel="noopener" class="hover:underline">Gift Cards</a></li>
             <li><a href="/join-our-team" class="hover:underline">Join Our Team</a></li>
             <li><a href="/salon-policy" class="hover:underline">Salon Policies &amp; FAQs</a></li>
           </ul>
@@ -339,7 +307,6 @@
         <div>
           <ul class="space-y-2">
             <li><a href="/locations/academy" class="hover:underline">The Academy</a></li>
-            <li><a href="/model" class="hover:underline">Model Program</a></li>
             <li><a href="/training" class="hover:underline">Training</a></li>
           </ul>
         </div>
@@ -417,6 +384,7 @@ import { retailGlobal } from '~/composables/retailGlobal';
 import { appGlobal } from '~/composables/appGlobal';
 const route = useRoute()
 const config = useRuntimeConfig()
+const { giftCardsUrl } = useZenotiLinks()
 
 const canonicalUrl = computed(() => {
   return `${config.public.siteUrl}${route.path}`

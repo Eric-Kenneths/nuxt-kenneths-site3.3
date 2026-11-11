@@ -67,6 +67,7 @@
 </template>
 
 <script setup>
+const { bookUrl } = useZenotiLinks()
 const route = useRoute()
 
 const state = reactive({
@@ -142,6 +143,6 @@ watchEffect(() => {
     const custParam = cust ? `&c=${cust}` : ''
     const serviceParam = offerMap[mid]?.serviceParam ?? ''
 
-    state.bookingUrl = `/book/new/promo?mid=${mid}&l=at${serviceParam}${custParam}`
+    state.bookingUrl = bookUrl(`mid=${mid}&l=at${serviceParam}${custParam}`)
 })
 </script>

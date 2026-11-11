@@ -313,6 +313,7 @@
 </template>
 
 <script setup>
+const { bookUrl } = useZenotiLinks()
 const route = useRoute()
 
 useHead({
@@ -326,8 +327,8 @@ useHead({
 })
 
 const state = reactive({
-    faceWaxUrl: '/book/new/promo?mid=465&p=w',
-    bikiniWaxUrl: '/book/new/promo?mid=464&p=w',
+    faceWaxUrl: bookUrl('mid=465&p=w'),
+    bikiniWaxUrl: bookUrl('mid=464&p=w'),
 })
 
 onMounted(() => {
