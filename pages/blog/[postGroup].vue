@@ -120,7 +120,7 @@
 <script setup>
 import { ref, reactive, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { appGlobal } from '~/composables/appGlobal'
+import { useBlogStore } from '~/stores/blog/blogStore'
 import { dataGlobal } from '~/composables/dataGlobal'
 import { useFilters } from '~/composables/useFilters'
 import { useHead, useAsyncData } from '#imports'
@@ -335,19 +335,23 @@ const itemsPerPage = 9
 const currentPage = ref(1)
 const searchQuery = ref('')
 
-const { data: postHeaders, pending, error } = await useAsyncData(
+const blogStore = useBlogStore()
+
+const { pending, error } = await useAsyncData(
   () => `blogHeaders-${category.value}`,
   async () => {
-    if (!category.value) return []
+    if (category.value) {
+      await blogStore.loadHeadersByPostGroup(category.value)
+    }
 
-    const url = `${appGlobal.apiBaseUrl}/khsds/Blog/ListHeaders/${category.value}`
-    return await $fetch(url)
+    return true
   },
   {
-    watch: [category],
-    default: () => []
+    watch: [category]
   }
 )
+
+const postHeaders = computed(() => blogStore.headersByPostGroup[category.value] ?? [])
 
 const state = reactive({
   loading: computed(() => pending.value),

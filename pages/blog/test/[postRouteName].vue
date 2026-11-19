@@ -91,6 +91,7 @@
 <script setup>
 import { appGlobal } from '~/composables/appGlobal'
 import { dataGlobal } from '~/composables/dataGlobal'
+import { useBlogStore } from '~/stores/blog/blogStore'
 import { onMounted, nextTick, watch } from 'vue'
 
 dataGlobal.sideBarVisible = false
@@ -108,43 +109,45 @@ const state = reactive({
   displayError: false
 })
 
-const url = appGlobal.apiBaseUrl + '/khsds/BlogDetail/RouteName/' + postRouteName
+// Salon-API-10 returns the post with its post group and related articles; an unknown route is a 404.
+const blogStore = useBlogStore()
 
-const { data: postDetails } = await useFetch(url)
-
-state.postDetails = postDetails.value.blogDetail
-
-if (state.postDetails.title === 'Error') {
-  state.displayError = true
-}
-
-// The post detail API doesn't return the post group (hair, skin, nails, products, news), but the
-// heading and the contextual CTA depend on it. Look it up in the header list.
-// `transform` keeps only the group in the page payload, not the whole 141-post list.
-if (!state.displayError) {
-  const { data: postGroup } = await useFetch(appGlobal.apiBaseUrl + '/khsds/Blog/ListHeaders', {
-    key: 'blog-post-group-' + postRouteName,
-    default: () => '',
-    transform: (headers) => {
-      const list = Array.isArray(headers) ? headers : (headers?.blogHeaders ?? [])
-      const wanted = String(postRouteName || '').trim().toLowerCase()
-      const header = list.find(item => String(item.routeName || '').trim().toLowerCase() === wanted)
-
-      return header?.postGroup || ''
+const { data: postLookup } = await useAsyncData('blog-post-' + postRouteName, async () => {
+  try {
+    await blogStore.loadPost(postRouteName)
+    return { notFound: false }
+  } catch (error) {
+    if (error.status === 404) {
+      return { notFound: true }
     }
-  })
-
-  if (postGroup.value) {
-    state.postDetails.postGroup = postGroup.value
+    throw error
   }
+})
+
+if (postLookup.value?.notFound || !blogStore.post) {
+  state.displayError = true
+  state.postDetails = {
+    title: '',
+    subTitle: '',
+    author: '',
+    htmlContent: '',
+    textContent: '',
+    photoName: 'logo.webp',
+    publishDate: '',
+    postGroup: '',
+    relatedBlogArticles: []
+  }
+} else {
+  state.postDetails = { ...blogStore.post }
 }
 
 const postURL = 'https://kenneths.com/blog/post/' + postRouteName
 
-const urlSocial = appGlobal.apiBaseUrl + '/employees/SocialMedia/ForWebRandom/'
-const { data: employeeList } = await useFetch(urlSocial)
+// Unused by this page; commented out so it no longer calls Kenneths-API-9 on every render.
+// const urlSocial = appGlobal.apiBaseUrl + '/employees/SocialMedia/ForWebRandom/'
+// const { data: employeeList } = await useFetch(urlSocial)
 
-state.socialRating = employeeList.value.socialRatingViewModel
+// state.socialRating = employeeList.value.socialRatingViewModel
 
 const postGroupText = computed(() => getPostGroup())
 

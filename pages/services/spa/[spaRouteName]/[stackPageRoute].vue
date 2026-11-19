@@ -101,7 +101,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { appGlobal } from '~/composables/appGlobal'
+import { useSupportingStackPageStore } from '~/stores/service/supportingStackPageStore'
 import { dataGlobal } from '~/composables/dataGlobal'
 
 dataGlobal.sideBarVisible = false
@@ -126,8 +126,8 @@ const state = reactive({
         supportingFAQs: [],
         supportingStackLinks: [],
         stackPageSchema: '[]',
-        addttm: '',
-        audttm: '',
+        createdUtc: '',
+        updatedUtc: '',
         author: '',
         authorURL: '',
         Description: '',
@@ -137,33 +137,27 @@ const state = reactive({
     }
 })
 
-const url = computed(() =>
-    appGlobal.apiBaseUrl +
-    '/khsds/SupportingStackPage/' +
-    spaRouteName.value +
-    '/' +
-    stackPageRoute.value
+// Salon-API-10 returns the page with its FAQs and links; an unknown route answers 404
+const supportingStackPageStore = useSupportingStackPageStore()
+
+const { data: stackPageLookup } = await useAsyncData(
+    () => `supporting-stack-page-${spaRouteName.value}-${stackPageRoute.value}`,
+    async () => {
+        try {
+            await supportingStackPageStore.loadSupportingStackPage(spaRouteName.value, stackPageRoute.value)
+            return { notFound: false }
+        } catch (error) {
+            if (error.status === 404) {
+                return { notFound: true }
+            }
+            throw error
+        }
+    },
+    { watch: [spaRouteName, stackPageRoute] }
 )
 
-const { data: stackPage, error } = await useFetch(url, {
-    default: () => ({
-        supportingStackPageViewModel: {
-            title: '',
-            htmlContent: '',
-            supportingFAQs: [],
-            supportingStackLinks: [],
-            stackPageSchema: '[]',
-            addttm: '',
-        audttm: '',
-            author: '',
-            authorURL: '',
-            Description: '',
-            linkDescription: '',
-            metaDescription: '',
-            serviceTypeRoute: ''
-        }
-    })
-})
+const stackPage = computed(() => supportingStackPageStore.page)
+const error = computed(() => (stackPageLookup.value?.notFound ? new Error('Not found') : null))
 
 function normalizeText(value) {
     return typeof value === 'string' ? value.trim() : ''
@@ -198,15 +192,15 @@ function safeJsonParse(value, fallback) {
     }
 }
 
+// createdUtc / updatedUtc come from Salon-API-10 as UTC without an offset
 function toArticleDateTime(raw) {
     if (!raw) return undefined
-    const withoutOffset = String(raw).replace(/(?:Z|[+-]\d{1,2}:?\d{0,2})$/, '')
-    const withTime = withoutOffset.includes('T') ? withoutOffset : withoutOffset + 'T00:00:00'
-    return withTime + '-05:00'
+    const value = String(raw)
+    return /(?:Z|[+-]\d{2}:?\d{2})$/.test(value) ? value : value + 'Z'
 }
 
 const currentStackPage = computed(() => {
-    const raw = stackPage.value?.supportingStackPageViewModel || state.stackPage
+    const raw = stackPage.value || state.stackPage
 
     return {
         ...raw,
@@ -218,7 +212,7 @@ const currentStackPage = computed(() => {
         serviceTypeRoute: normalizeText(raw.serviceTypeRoute),
         author: normalizeText(raw.author),
         authorURL: normalizeText(raw.authorURL),
-        addttm: normalizeText(raw.addttm),
+        createdUtc: normalizeText(raw.createdUtc),
         supportingFAQs: Array.isArray(raw.supportingFAQs)
             ? raw.supportingFAQs.map(faq => ({
                 ...faq,
@@ -319,8 +313,8 @@ const jsonLDString = computed(() => {
                 '@type': 'Article',
                 headline: currentStackPage.value.title,
                 image: stackPageImages.value,
-                datePublished: toArticleDateTime(currentStackPage.value.addttm),
-                dateModified: toArticleDateTime(currentStackPage.value.audttm || currentStackPage.value.addttm),
+                datePublished: toArticleDateTime(currentStackPage.value.createdUtc),
+                dateModified: toArticleDateTime(currentStackPage.value.updatedUtc || currentStackPage.value.createdUtc),
                 author: {
                     '@type': 'Person',
                     name: currentStackPage.value.author,
@@ -426,11 +420,11 @@ useHead({
         // Article metadata
         {
             property: 'article:published_time',
-            content: () => toArticleDateTime(currentStackPage.value.addttm) || ''
+            content: () => toArticleDateTime(currentStackPage.value.createdUtc) || ''
         },
         {
             property: 'article:modified_time',
-            content: () => toArticleDateTime(currentStackPage.value.audttm || currentStackPage.value.addttm) || ''
+            content: () => toArticleDateTime(currentStackPage.value.updatedUtc || currentStackPage.value.createdUtc) || ''
         },
         {
             property: 'article:author',

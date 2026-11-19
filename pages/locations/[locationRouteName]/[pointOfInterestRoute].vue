@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { appGlobal } from '~/composables/appGlobal';
+import { useGeoStackPageStore } from '~/stores/location/geoStackPageStore';
 import { dataGlobal } from '~/composables/dataGlobal';
 
 dataGlobal.sideBarVisible = false;
@@ -119,23 +119,54 @@ const state = reactive({
     updatedHtml: ''
 });
 
-const url = appGlobal.apiBaseUrl + '/khsds/GeoStackPage/' + pointOfInterestRoute;
-const { data: geoStack, error } = await useFetch(url, {
-    default: () => null
+// Page, center and Google Business details come from Salon-API-10. Salon's center has no
+// extendedDescription or service flags yet, so those still come from the legacy location record.
+const geoStackPageStore = useGeoStackPageStore();
+
+const { data: geoLookup } = await useAsyncData('geo-stack-' + pointOfInterestRoute, async () => {
+    try {
+        await geoStackPageStore.loadGeoStackPage(pointOfInterestRoute);
+    } catch (error) {
+        if (error.status === 404) {
+            return { notFound: true };
+        }
+        throw error;
+    }
+
+    return { notFound: false };
 });
 
 const { throwError } = useResponse();
 
-if (error.value || !geoStack.value?.geoStackPageViewModel?.title) {
+const geoStack = geoStackPageStore.page;
+
+if (geoLookup.value?.notFound || !geoStack?.geoStackPage?.title) {
     throwError(404, `Page not found: ${locationRouteName}/${pointOfInterestRoute}`);
 }
 
-if (geoStack.value) {
-    state.geoStackPage = geoStack.value.geoStackPageViewModel ?? {};
-    state.location = geoStack.value.locationViewModel ?? {};
-    state.locationService = geoStack.value.locationServiceViewModel ?? {};
-    state.gmbUrl = geoStack.value.gmbUrl ?? '';
-    state.locationRoute = geoStack.value.locationRoute ?? '';
+if (geoStack) {
+    const center = geoStack.location;
+    const legacyLocation = geoStackPageStore.legacyLocation;
+
+    state.geoStackPage = geoStack.geoStackPage ?? {};
+    state.location = {
+        address: [center?.address1, center?.address2].filter(Boolean).join(', '),
+        cityState: center ? `${center.city}, ${center.state}` : '',
+        extendedDescription: legacyLocation?.extendedDescription ?? center?.displayName ?? ''
+    };
+    // Same mapping the legacy GeoStackPage endpoint used to build its service flags
+    state.locationService = {
+        hair: !!legacyLocation?.hasStylist,
+        facials: !!legacyLocation?.hasEsthetician,
+        waxings: !!legacyLocation?.hasWaxologist,
+        makeup: !!legacyLocation?.hasEsthetician,
+        nails: !!legacyLocation?.hasNailTech,
+        browLash: !!legacyLocation?.hasEsthetician,
+        massage: !!legacyLocation?.hasTherapist,
+        spaBar: !!legacyLocation?.hasBar
+    };
+    state.gmbUrl = geoStack.gmbUrl ?? '';
+    state.locationRoute = geoStack.locationRoute ?? '';
 }
 
 // The API looks a page up by its place route alone, so without this check the same article would

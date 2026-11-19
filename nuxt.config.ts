@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     // Server routes (feed, post, sitemap) read the production legacy API even in dev.
     // Override with NUXT_LEGACY_API_SERVER_URL.
     legacyApiServerUrl: 'https://api.kenneths.com/api',
+    // The sitemap route reads blog, geo stack and supporting stack pages from Salon-API-10.
+    // No production URL yet; override with NUXT_SALON_API_SERVER_URL.
+    salonApiServerUrl: 'https://localhost:7257/api',
     public: {
       siteUrl: 'https://kenneths.com',
       // API base URLs. Override with NUXT_PUBLIC_SALON_API_BASE_URL / NUXT_PUBLIC_LEGACY_API_BASE_URL.

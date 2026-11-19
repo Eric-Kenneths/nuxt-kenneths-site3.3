@@ -183,7 +183,7 @@ export function useKhsds() {
       }
     
       async function getBlogHeaders() {
-        const url = appGlobal.apiBaseUrl + '/khsds/Blog/ListHeaders';
+        const url = useRuntimeConfig().public.salonApiBaseUrl + '/Marketing/BlogHeaders';
         
         array.value = [];
         
@@ -203,29 +203,6 @@ export function useKhsds() {
           })
           
         return array.value;
-      }
-    
-      async function getBlogDetailsByHeaderId(blogHeaderId) {
-        const url = appGlobal.apiBaseUrl + '/khsds/Blog/GetDetails/' + blogHeaderId;
-        
-        object.value = {};
-        
-        await fetch(url)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) { 
-              throwError(500, "Error in useKhsds.getBlogDetailsByHeaderId");
-            }
-            object.value = data;
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () { 
-            //Maybe do something
-          })
-          
-        return object.value;
       }
     
       async function getItemWebById(itemWebId) {
@@ -643,29 +620,6 @@ export function useKhsds() {
         return object.value;
       }
     
-      async function getBlogDetailByRouteName(routeName) {
-        const url = appGlobal.apiBaseUrl + '/khsds/BlogDetail/RouteName/' + routeName;
-        
-        object.value = {};
-        
-        await fetch(url)
-          .then(response => response.json())
-          .then(function (data) {
-            if (!handleResponse(data)) { 
-              throwError(500, "Error in useKhsds.getBlogDetailByRouteName");
-            }
-            object.value = data.blogDetail;
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () { 
-            //Maybe do something
-          })
-          
-        return object.value;
-      }
-    
       async function getItemWebForSearch(search) {
         const url = appGlobal.apiBaseUrl + '/khsds/ItemWeb/Search/' + search;
         
@@ -859,39 +813,10 @@ export function useKhsds() {
         return array.value;
       }
 
-      async function getGeoStackPage(pointOfInterestRoute) {
-        appGlobal.loading = true;
-        
-        const url = appGlobal.apiBaseUrl + '/Khsds/GeoStackPage/' + pointOfInterestRoute;
-        
-        const options = getRequestOptions('GET', true);
-    
-        var geoStackPage = {};
-    
-        await fetch(url, options)
-          .then(response =>  response.json().then(data => ({status: response.status, body: data})))
-          .then(function(obj) {
-  
-            if (obj.status !== 200) {
-              throwError(500, "Error in useKhsds.getGeoStackPage");
-            } else {
-              geoStackPage = obj.body.geoStackPageViewModel;
-            }
-          })
-          .catch(function (e) {
-            throwError(500, e.message);
-          })
-          .finally(function () {
-            appGlobal.loading = false;
-          })
-    
-          return geoStackPage;
-      } 
-
       async function getGeoStackPagesForPublish() {
         appGlobal.loading = true;
         
-        const url = appGlobal.apiBaseUrl + '/Khsds/GeoStackPagesForPublish';
+        const url = useRuntimeConfig().public.salonApiBaseUrl + '/Marketing/GeoStackPages';
         
         const options = getRequestOptions('GET', true);
     
@@ -904,7 +829,7 @@ export function useKhsds() {
             if (obj.status !== 200) {
               throwError(500, "Error in useKhsds.getGeoStackPagesForPublish");
             } else {
-              geoStackPages = obj.body.geoStackPageViewModels;
+              geoStackPages = obj.body;
             }
           })
           .catch(function (e) {
@@ -920,7 +845,7 @@ export function useKhsds() {
       async function getSupportingStackPageForPublish() {
         appGlobal.loading = true;
         
-        const url = appGlobal.apiBaseUrl + '/Khsds/SupportingStackPagesForPublish';
+        const url = useRuntimeConfig().public.salonApiBaseUrl + '/Marketing/SupportingStackPages';
         
         const options = getRequestOptions('GET', false);
     
@@ -933,7 +858,7 @@ export function useKhsds() {
             if (obj.status !== 200) {
               throwError(500, "Error in useKhsds.getSupportingStackPageForPublish");
             } else {
-              supportingStackPages = obj.body.supportingStackPages;
+              supportingStackPages = obj.body;
             }
           })
           .catch(function (e) {
@@ -1044,7 +969,6 @@ export function useKhsds() {
         getGoodForsByDepartment,
         getItemWebListForWeb,
         getBlogHeaders,
-        getBlogDetailsByHeaderId,
         getItemWebById,
         postWebRetailSession,
         getWebRetailSessionById,
@@ -1062,7 +986,6 @@ export function useKhsds() {
         getItemWebGroupIdByDescription,
         getItemWebGroupById,
         getItemWebByWebName,
-        getBlogDetailByRouteName,
         getItemWebForSearch,
         getActiveServiceMenuDetails,
         getItemWebGroupForWeb,
@@ -1071,7 +994,6 @@ export function useKhsds() {
         getLocationSalons,
         getServiceDescriptionNoPrice,
         getStylistLevels,
-        getGeoStackPage,
         getGeoStackPagesForPublish,
         getSupportingStackPageForPublish,
         getCodeDescriptions,

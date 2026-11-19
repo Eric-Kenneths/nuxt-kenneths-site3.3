@@ -107,11 +107,16 @@
 <script setup>
 const { filterDateTimeToDate } = useFilters();
 
-import { appGlobal } from '~/composables/appGlobal';
+import { useBlogStore } from '~/stores/blog/blogStore';
 
-const url = appGlobal.apiBaseUrl + '/khsds/Blog/ListHeaders/featured'
+const blogStore = useBlogStore();
 
-const { data: postHeaders, error } = await useFetch(url);
+await useAsyncData('blog-headers-featured', async () => {
+    await blogStore.loadHeadersByPostGroup('featured');
+    return true;
+});
+
+const postHeaders = computed(() => blogStore.headersByPostGroup['featured'] ?? []);
 
 const track = ref(null)
 const atStart = ref(true)

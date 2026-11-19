@@ -98,7 +98,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { appGlobal } from '~/composables/appGlobal';
+import { useBlogStore } from '~/stores/blog/blogStore';
 import { dataGlobal } from '~/composables/dataGlobal';
 import { useFilters } from '~/composables/useFilters';
 import { useHead, useFetch } from '#imports';
@@ -299,12 +299,14 @@ const pageParam = () => route.params.page;
 const searchQuery = ref('');
 
 /* Fetch full list, then apply current search (empty by default) */
-const { data: postHeaders } = await useFetch(`${appGlobal.apiBaseUrl}/khsds/Blog/ListHeaders`, {
-  default: () => []
+const blogStore = useBlogStore();
+await useAsyncData('blog-headers', async () => {
+  await blogStore.loadHeaders();
+  return true;
 });
 
-if (postHeaders.value?.length) {
-  state.postHeaders = postHeaders.value.map((header) => ({
+if (blogStore.headers.length) {
+  state.postHeaders = blogStore.headers.map((header) => ({
     ...header,
     subTitle: normalizeInlineText(header?.subTitle)
   }));

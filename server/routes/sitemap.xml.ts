@@ -70,7 +70,9 @@ async function fetchJson(apiBase: string, path: string): Promise<any> {
   return response.json();
 }
 
-async function buildEntries(apiBase: string): Promise<UrlEntry[]> {
+// apiBase is Kenneths-API-9 (retail, staff); salonApiBase is Salon-API-10 (blog, geo stack and
+// supporting stack pages).
+async function buildEntries(apiBase: string, salonApiBase: string): Promise<UrlEntry[]> {
   const entries: UrlEntry[] = [];
 
   // Route values come straight from the database, and a few carry stray spaces (trailing, or inside
@@ -125,36 +127,36 @@ async function buildEntries(apiBase: string): Promise<UrlEntry[]> {
   }
 
   // ---- Blog posts ----
-  const blogHeaders = await fetchJson(apiBase, '/khsds/Blog/ListHeaders');
-  for (const post of Array.isArray(blogHeaders) ? blogHeaders : (blogHeaders?.blogHeaders ?? [])) {
+  const blogHeaders = await fetchJson(salonApiBase, '/Marketing/BlogHeaders');
+  for (const post of Array.isArray(blogHeaders) ? blogHeaders : []) {
     // Some stored route names carry a trailing space; it must not leak into the <loc>
     const routeName = String(post?.routeName ?? '').trim();
 
     if (routeName) {
-      add(`/blog/post/${routeName}`, '0.75', toLastmodDate(post.audttm) || toLastmodDate(post.publishDate));
+      add(`/blog/post/${routeName}`, '0.75', toLastmodDate(post.updatedUtc) || toLastmodDate(post.publishDate));
     }
   }
 
   // ---- Geo stack pages ----
-  const geoStackResponse = await fetchJson(apiBase, '/Khsds/GeoStackPagesForPublish');
-  for (const page of geoStackResponse?.geoStackPageViewModels ?? []) {
+  const geoStackPages = await fetchJson(salonApiBase, '/Marketing/GeoStackPages');
+  for (const page of Array.isArray(geoStackPages) ? geoStackPages : []) {
     if (page?.locationRoute && page?.pointOfInterestRoute) {
       add(
         `/locations/${page.locationRoute}/${page.pointOfInterestRoute}`,
         '0.70',
-        toLastmodDate(page.audttm) || toLastmodDate(page.addttm)
+        toLastmodDate(page.updatedUtc) || toLastmodDate(page.createdUtc)
       );
     }
   }
 
   // ---- Service supporting-stack articles ----
-  const stackPageResponse = await fetchJson(apiBase, '/Khsds/SupportingStackPagesForPublish');
-  for (const page of stackPageResponse?.supportingStackPages ?? []) {
+  const stackPages = await fetchJson(salonApiBase, '/Marketing/SupportingStackPages');
+  for (const page of Array.isArray(stackPages) ? stackPages : []) {
     if (page?.serviceCategory && page?.serviceTypeRoute && page?.stackPageRoute) {
       add(
         `/services/${page.serviceCategory}/${page.serviceTypeRoute}/${page.stackPageRoute}`,
         '0.70',
-        toLastmodDate(page.audttm) || toLastmodDate(page.addttm)
+        toLastmodDate(page.updatedUtc) || toLastmodDate(page.createdUtc)
       );
     }
   }
@@ -183,7 +185,8 @@ export default defineEventHandler(async (event) => {
   let entries: UrlEntry[];
 
   try {
-    entries = await buildEntries(useRuntimeConfig(event).legacyApiServerUrl);
+    const runtimeConfig = useRuntimeConfig(event);
+    entries = await buildEntries(runtimeConfig.legacyApiServerUrl, runtimeConfig.salonApiServerUrl);
   } catch (e: any) {
     setResponseStatus(event, 500);
     return `Sitemap generation failed: ${e?.message || 'unknown error'}`;
