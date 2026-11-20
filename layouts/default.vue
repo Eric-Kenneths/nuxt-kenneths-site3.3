@@ -4,11 +4,12 @@
       <Toast />
     </ClientOnly>
 
-    <header class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[1600px] z-50">
+    <header class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[1600px] z-50 pointer-events-none">
       <!-- Row 1 (solid background) -->
-      <div class="bg-primary-500 shadow-md pr-2 lg:pr-0 py-2 pl-10 lg:py-0">
+      <div class="bg-primary-500 shadow-md pr-2 lg:pr-0 py-2 pl-10 lg:py-0 pointer-events-auto">
         <div class="mx-auto max-w-[1600px] py-0.5 flex justify-between items-center">
-          <div class="text-white text-xl hidden lg:block pl-2"><a href="/shop/retail/top-sellers">{{ announcement }}</a></div>
+          <div class="text-white text-xl hidden lg:block pl-2"><a href="/shop/retail/top-sellers">{{ announcement }}</a>
+          </div>
 
           <div class="flex flex-1 lg:flex-none lg:mr-13 items-center justify-end">
             <div class="flex items-center gap-3">
@@ -16,7 +17,9 @@
                 (614) 538-5800
               </a>
 
-              <BookNowButton class="px-5 py-2 cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap inline-block">Make an Appointment</BookNowButton>
+              <BookNowButton
+                class="px-5 py-2 cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap inline-block">
+                Make an Appointment</BookNowButton>
 
               <a href="/locations"
                 class="px-5 py-2 cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap hidden lg:inline-flex">
@@ -44,7 +47,7 @@
 
       <!-- Row 2 (transparent) -->
       <div class="bg-transparent  transition-transform duration-200 ease-out"
-        :class="row2Hidden ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'">
+        :class="row2Hidden ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100 [& _a]: pointer - events - auto[& _button]: pointer - events - auto'">
         <div
           class="mx-auto max-w-[1600px] px-4 pt-3  lg:pt-8 flex justify-center space-x-8 items-center text-primary-100">
           <!-- Navigation Links: Only on desktop (lg+) LEFT SIDE -->
@@ -69,7 +72,8 @@
           <div class="items-center space-x-6 ml-auto hidden lg:flex">
             <a href="/about" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Our Story</a>
             <a href="/our-team" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Our Team</a>
-            <a :href="giftCardsUrl()" rel="noopener" class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Gift
+            <a :href="giftCardsUrl()" rel="noopener"
+              class="hover:text-primary-emphasis text-xl py-1 k-menu-text-shadow">Gift
               Cards</a>
             <!-- <img class="h-7 cursor-pointer k-shadow-img" src="/images/icons/search.webp" alt="Search Kenneth's" /> -->
           </div>
@@ -155,7 +159,8 @@
                 <a href="/shop/retail/top-sellers" class="text-primary-100 hover:text-primary-emphasis">Products</a>
               </div>
               <div>
-                <a :href="giftCardsUrl()" rel="noopener" class="text-primary-100 hover:text-primary-emphasis">Gift Cards</a>
+                <a :href="giftCardsUrl()" rel="noopener" class="text-primary-100 hover:text-primary-emphasis">Gift
+                  Cards</a>
               </div>
               <div>
                 <a href="/about" class="text-primary-100 hover:text-primary-emphasis">Our Story</a>
@@ -172,7 +177,9 @@
               <div class="pb-5 flex">
 
 
-                <BookNowButton class="px-19 py-2 text-center cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap inline-block">Make an Appointment</BookNowButton>
+                <BookNowButton
+                  class="px-19 py-2 text-center cursor-pointer rounded-3xl bg-primary-100 text-primary-900 hover:bg-primary-emphasis whitespace-nowrap inline-block">
+                  Make an Appointment</BookNowButton>
 
 
               </div>
