@@ -100,6 +100,7 @@ const router = useRouter()
 const { postRouteName } = useRoute().params
 const { filterDateTimeToDate } = useFilters()
 const { bindBlogDownloadTracking } = useBlogDownloads()
+const { bindBlogTestimonials } = useBlogTestimonials()
 const { resolveBlogCta, trackBlogCtaClick } = useBlogCta()
 const { cleanBlogTitle, buildBlogTitle, buildBlogDescription } = useBlogSeo()
 
@@ -396,6 +397,7 @@ onMounted(async () => {
   document.head.appendChild(scriptIG)
 
   addUnderlineToLinks()
+  bindBlogTestimonials()
   bindBlogDownloadTracking()
 })
 
@@ -406,6 +408,7 @@ watch(
 
     await nextTick()
     addUnderlineToLinks()
+    bindBlogTestimonials()
   },
   { immediate: true }
 )

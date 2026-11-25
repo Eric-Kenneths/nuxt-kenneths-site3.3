@@ -1,0 +1,56 @@
+/* Testimonials embedded in blog HTML. Behavior: composables/useBlogTestimonials.js */
+
+.blog-testimonial {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--p-primary-500);
+  font-style: normal;
+}
+
+.blog-testimonial__text.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.blog-testimonial__text > :first-child {
+  margin-top: 0;
+}
+
+.blog-testimonial__text > :last-child {
+  margin-bottom: 0;
+}
+
+.blog-testimonial cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.blog-testimonial__toggle {
+  margin-top: 0.5rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* The hidden attribute must win over any display rule above */
+.blog-testimonial__toggle[hidden] {
+  display: none;
+}
+
+.blog-testimonial__toggle:hover {
+  opacity: 0.75;
+}
+
+.blog-testimonial__toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
